@@ -6,5 +6,25 @@ including schema exploration and data extraction capabilities.
 """
 
 from .schema_explorer import MiradiSchemaExplorer
+from .miradi_parser import (
+    MiradiParser, 
+    BaseParser, 
+    ParsedElement, 
+    ParsingStats,
+    UnknownElementHandling,
+    ElementPriority,
+    MiradiParsingError,
+    MiradiValidationError
+)
 
-__all__ = ["MiradiSchemaExplorer"]
+__all__ = [
+    "MiradiSchemaExplorer",
+    "MiradiParser", 
+    "BaseParser", 
+    "ParsedElement", 
+    "ParsingStats",
+    "UnknownElementHandling",
+    "ElementPriority",
+    "MiradiParsingError",
+    "MiradiValidationError"
+]
