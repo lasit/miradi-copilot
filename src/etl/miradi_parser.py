@@ -177,6 +177,19 @@ class BaseParser(ABC):
         pass
     
     @abstractmethod
+    def extract_activities(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract activities from Task elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed activity (task) elements
+        """
+        pass
+    
+    @abstractmethod
     def parse_all(self, file_path: Union[str, Path]) -> Dict[str, Any]:
         """
         Orchestrate all extractors to parse a complete Miradi project.
@@ -855,6 +868,71 @@ class MiradiParser(BaseParser):
         self.logger.info(f"Extracted {len(models)} conceptual models")
         return models
     
+    def extract_activities(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract activities from Task elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed activity (task) elements
+        """
+        self.logger.info("Extracting activities")
+        activities = []
+        
+        # Find TaskPool
+        task_pool = None
+        for elem in root.iter():
+            if self._clean_element_name(elem.tag) == "TaskPool":
+                task_pool = elem
+                break
+        
+        if task_pool is None:
+            self.logger.warning("TaskPool not found")
+            return activities
+        
+        # Extract individual tasks/activities
+        for elem in task_pool.iter():
+            if self._clean_element_name(elem.tag) == "Task":
+                activity_data = self._extract_element_data(elem)
+                
+                # Extract key identifiers
+                activity_id = None
+                activity_uuid = None
+                activity_name = None
+                activity_identifier = None
+                
+                for child in elem.iter():
+                    child_name = self._clean_element_name(child.tag)
+                    if child_name == "TaskId" and child.text:
+                        activity_id = child.text.strip()
+                    elif child_name == "TaskUUID" and child.text:
+                        activity_uuid = child.text.strip()
+                    elif child_name == "TaskName" and child.text:
+                        activity_name = child.text.strip()
+                    elif child_name == "TaskIdentifier" and child.text:
+                        activity_identifier = child.text.strip()
+                
+                activity = ParsedElement(
+                    element_type="Task",
+                    element_id=activity_id,
+                    uuid=activity_uuid,
+                    name=activity_name,
+                    data=activity_data,
+                    priority=ElementPriority.MUST_SUPPORT
+                )
+                
+                # Add identifier to data if present
+                if activity_identifier:
+                    activity.data['identifier'] = activity_identifier
+                
+                activities.append(activity)
+                self._track_element_stats("Task")
+        
+        self.logger.info(f"Extracted {len(activities)} activities")
+        return activities
+    
     def parse_all(self, file_path: Union[str, Path]) -> Dict[str, Any]:
         """
         Orchestrate all extractors to parse a complete Miradi project.
@@ -891,6 +969,7 @@ class MiradiParser(BaseParser):
                 'conservation_targets': self.extract_conservation_targets(root),
                 'threats': self.extract_threats(root),
                 'strategies': self.extract_strategies(root),
+                'activities': self.extract_activities(root),
                 'results_chains': self.extract_results_chains(root),
                 'conceptual_models': self.extract_conceptual_models(root),
                 'parsing_stats': self.stats,
