@@ -1,0 +1,224 @@
+# Miradi Co-Pilot Development Rules for Cline
+
+## Project Context
+This is a GraphRAG-powered natural language interface for Miradi conservation projects using Neo4j, Python, and FastAPI. The system:
+- Processes Miradi XML/JSON files into Neo4j graph database
+- Uses GraphRAG for intelligent querying of conservation data
+- Has FastAPI backend and Streamlit frontend
+- Follows strict component isolation patterns
+
+## Architecture Rules
+1. Follow the architecture defined in docs/01-architecture-overview.md
+2. Adhere to the domain model in docs/02-domain-model.md
+3. Use the graph schema patterns from docs/04-graph-schema.md
+4. Respect the 3-tier architecture (Data, API, Presentation)
+5. Maintain clear separation between ETL, GraphRAG, and API layers
+
+## Code Modification Rules
+1. **One Component Rule**: Only modify files within ONE component per task (etl/, graph/, api/, etc.)
+2. **Explicit File Scope**: Always specify which files you'll modify before making changes
+3. **No Cascade Refactoring**: If changes require updates in multiple components, list them but implement only the requested component
+4. Document which files will be modified at session start
+5. Stick to the declared scope - no scope creep during development
+6. If new files are needed, explicitly discuss and approve first
+
+## Development Patterns
+
+### Parser Development
+- Follow the modular approach in etl/
+- Each extraction method should be independent
+- Always validate against schema in docs/schemas/
+- Build parsers incrementally, one Miradi element type at a time
+- Handle missing optional fields gracefully
+- Validate required fields and provide clear error messages
+- Support multiple Miradi versions when possible
+
+### Graph Operations
+- Use batch operations for Neo4j
+- Follow the node/relationship types defined in documentation
+- Always create indexes and constraints
+- Follow the exact schema defined in docs/04-graph-schema.md
+- Use correct node labels and relationship types
+- Include all required properties, handle optional ones gracefully
+- Maintain referential integrity in graph relationships
+
+### API Development
+- Follow RESTful conventions
+- Use Pydantic models for validation
+- Include comprehensive error handling
+- API responses should return within 2 seconds for typical queries
+- Include OpenAPI documentation
+- Follow established error handling patterns
+
+## Testing Rules
+1. Write tests BEFORE implementation when possible
+2. Each new function must have corresponding tests
+3. Use pytest fixtures for test data
+4. Mock external services (Neo4j, LLMs) in unit tests
+5. All new functions MUST have unit tests
+6. API endpoints MUST have integration tests
+7. Critical conservation logic MUST have end-to-end tests
+8. Error conditions MUST be tested, not just happy paths
+9. Include performance requirements in tests (e.g., "parse 1000 targets in <5 seconds")
+10. Test organization:
+    - tests/unit/ for component-specific tests
+    - tests/integration/ for cross-component tests
+    - tests/e2e/ for full workflow tests
+    - Mirror source structure: tests/unit/etl/test_parsers.py matches etl/parsers/
+
+## Documentation Rules
+1. Update relevant docs/ files when making architectural changes
+2. Add docstrings to all functions and classes
+3. Include usage examples in docstrings
+4. Update schema discovery log when finding new Miradi elements
+5. All public functions must have docstrings with examples
+6. Complex algorithms need inline comments explaining the logic
+7. Database queries need performance notes and usage examples
+
+## Error Handling
+1. Never use bare except clauses
+2. Log errors with appropriate context
+3. Fail gracefully with informative error messages
+4. Validate input data before processing
+5. Provide specific, actionable error messages
+6. Handle external dependencies gracefully (Neo4j, file system)
+7. Never fail silently - always surface issues appropriately
+
+## Schema Discovery Specific Rules
+1. When unknown XML elements are found, log them to docs/schemas/schema-discovery-log.md
+2. Never skip unknown elements silently
+3. Maintain backward compatibility with all discovered schemas
+4. Version the schema (v1, v2, etc.) when significant changes are found
+5. Always update docs/schemas/schema-discovery-log.md when analyzing new Miradi files
+6. Document schema variations and anomalies found
+7. Track Miradi version differences and their impact on parsing
+8. Note data quality issues for parser robustness
+
+## Performance Considerations
+1. Use streaming for large XML files
+2. Implement pagination for API responses
+3. Cache frequently accessed data
+4. Use connection pooling for Neo4j
+5. ETL operations must handle large Miradi files (1000+ elements)
+6. Graph queries must be optimized with proper indexes
+7. Memory usage should be reasonable for batch processing
+
+## Security Rules
+1. Never hardcode credentials
+2. Use environment variables for configuration
+3. Validate and sanitize all user inputs
+4. Use parameterized queries for Neo4j
+5. Validate security considerations (input sanitization, etc.)
+6. No hardcoded configuration values
+
+## Git Operations
+1. **Never auto-commit**: Do not make any git commits unless explicitly asked
+2. **Never push**: Do not push to remote repository  
+3. **Show changes**: When asked about git, show changed files but don't commit
+4. **No git commands**: Focus on code changes only, user handles git
+5. **Summary when done**: After completing a task, summarize what files were created/modified
+
+When a task is complete, provide a summary like:
+- Created: [list of new files]
+- Modified: [list of changed files]
+- Suggested commit message: [conventional commit format]
+
+## Git Commit Rules
+1. Make small, focused commits
+2. Use conventional commit messages (feat:, fix:, docs:, etc.)
+3. Never commit .env files or credentials
+4. Include tests with feature commits
+5. Confirm all tests pass and coverage is maintained
+
+## Conservation Domain Rules
+
+### Domain Model Adherence
+- Use correct conservation terminology from docs/02-domain-model.md
+- Respect Miradi concept relationships (Threats AFFECT Targets, etc.)
+- Validate business rules (e.g., ConservationTarget must have name and type)
+- Maintain semantic meaning when transforming data
+
+### Conservation Domain Mistakes to Avoid
+- Don't confuse DirectThreats with ContributingFactors
+- Don't create invalid relationships (e.g., Strategy AFFECTS Target directly)
+- Don't ignore Miradi-specific validation rules
+- Don't lose semantic meaning during data transformation
+
+## Development Workflow Rules
+
+### Session Planning
+- Start each session by reviewing docs/07-development-guide.md
+- Define clear objectives and success criteria
+- Identify dependencies and potential blockers
+- Set realistic scope for the session duration
+
+### Code Review Checklist
+- Verify algorithm correctness and edge case handling
+- Check integration with existing components
+- Ensure consistent naming and code organization
+- Confirm all tests pass and coverage is maintained
+
+### Prompt Engineering
+- Provide specific context about conservation concepts when relevant
+- Include expected input/output formats for parsers
+- Specify Neo4j schema requirements for graph operations
+- Reference existing patterns and conventions
+
+## Anti-Patterns to Avoid
+
+### Scope Violations
+- Don't refactor multiple components in one session
+- Don't mix bug fixes with new feature development
+- Don't change database schema without explicit discussion
+- Don't modify existing APIs without considering backward compatibility
+
+### Technical Debt
+- Don't hardcode values that should be configurable
+- Don't skip error handling for "simple" operations
+- Don't create overly complex solutions for straightforward problems
+- Don't ignore performance implications of graph queries
+
+## Project-Specific Conventions
+
+### File Naming
+- Parsers: miradi_{element_type}_parser.py
+- Models: {domain_concept}_model.py
+- Queries: {analysis_type}_queries.py
+- Tests: test_{component_name}.py
+
+### Import Organization
+- Standard library imports first
+- Third-party imports second
+- Local project imports last
+- Use absolute imports for clarity
+
+### Logging Standards
+- Use structured logging with consistent format
+- Include conservation context in log messages
+- Log performance metrics for ETL operations
+- Maintain appropriate log levels (DEBUG, INFO, WARNING, ERROR)
+
+## When Uncertain
+1. Ask for clarification before proceeding
+2. Refer to existing documentation
+3. Propose the approach before implementing
+4. Check if similar patterns exist in the codebase
+5. Reference docs/07-development-guide.md for guidance
+
+## Success Criteria
+
+### Definition of Done
+- All tests pass (unit, integration, e2e)
+- Code coverage meets 80% minimum threshold
+- Documentation is complete and accurate
+- Performance benchmarks are met
+- Security scan passes without issues
+- Code review is approved
+
+### Quality Gates
+- All error conditions are handled appropriately
+- Conservation domain rules are respected
+- Graph schema compliance is maintained
+- API contracts are preserved
+
+Remember: The goal is to build a robust, maintainable system that accurately represents conservation planning concepts while providing reliable data processing and intelligent querying capabilities through GraphRAG technology.
