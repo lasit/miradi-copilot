@@ -1,73 +1,1007 @@
-# Schema Discovery Log
+# Miradi Schema Discovery Log
 
-## Overview
+**Generated:** 2025-07-05 01:32:58
 
-This document tracks the analysis of Miradi project files to understand schema variations and evolution.
+This log tracks the analysis of Miradi project files to understand schema variations and element usage patterns.
 
-## Discovery Process
+## Analysis Summary
 
-### Analysis Methodology
+- **Total Projects Analyzed:** 11
+- **Unique Element Types Found:** 689
+- **Total Element Instances:** 619358
 
-### Tools and Scripts
+## Projects Analyzed
 
-### Validation Procedures
+| Project File | Size (MB) | Last Modified | Elements Found |
+|--------------|-----------|---------------|----------------|
+| Bulgul_Rangers_v0.111.xmpz2 | 3.3 | 2025-07-04 22:28:05 | 395 |
+| CMP_Strategic_Plan_2023-2033_v0.13.xmpz2 | 1.05 | 2025-07-04 23:36:15 | 327 |
+| Caring_for_Country_v0.18.xmpz2 | 1.55 | 2025-07-04 23:14:12 | 365 |
+| CfC_Adaptive_Management_v0.6.xmpz2 | 0.37 | 2025-07-04 23:14:33 | 357 |
+| Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2 | 0.09 | 2025-07-04 23:20:38 | 370 |
+| Garngi_Healthy_Country_Plan_v0.33.xmpz2 | 1.53 | 2025-07-04 23:14:54 | 362 |
+| Malak_Malak_Rangers_v0.77.xmpz2 | 2.38 | 2025-07-04 23:15:48 | 394 |
+| Mardbalk_HCP_v0.96.xmpz2 | 2.7 | 2025-07-04 23:16:53 | 408 |
+| Miradi_Marine_Example_v0.48.xmpz2 | 0.3 | 2025-07-04 23:33:49 | 629 |
+| Template_Result_Chains_v0.2.xmpz2 | 0.08 | 2025-07-04 23:17:11 | 256 |
+| Wardaman_IPA_Rangers_v0.55.xmpz2 | 1.97 | 2025-07-04 23:17:35 | 406 |
 
-## Project Analysis Log
+## Element Distribution Overview
 
-### Project 1: [Project Name]
+| Category | Count | Description |
+|----------|-------|-------------|
+| **Core Elements** | 173 | Present in ALL projects (100%) |
+| **Common Elements** | 65 | Present in 75%+ of projects |
+| **Optional Elements** | 267 | Present in 25-74% of projects |
+| **Rare Elements** | 184 | Present in <25% of projects |
 
-#### File Information
-- **File Name**: 
-- **Miradi Version**: 
-- **Date Analyzed**: 
-- **File Size**: 
+## Core Elements (Essential Schema)
 
-#### Schema Findings
-- **Elements Found**: 
-- **Relationships Identified**: 
-- **Unique Patterns**: 
-- **Anomalies**: 
+These elements appear in **ALL** analyzed projects and represent the essential Miradi schema:
 
-#### Notes
-- **Data Quality**: 
-- **Completeness**: 
-- **Special Considerations**: 
+- `br` (2846 total occurrences)
+- `div` (6746 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ActivityId` (3358 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTarget` (108 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetId` (1622 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetName` (108 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetUUID` (108 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetViabilityMode` (108 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModel` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelDiagramFactorIds` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelDiagramLinkIds` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelName` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelSelectedTaggedObjectSetIds` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelUUID` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConservationProject` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ContributingFactorTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Dashboard` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DashboardPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DashboardStatusEntries` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DashboardUUID` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactor` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorBackgroundColor` (394 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorFontColor` (2323 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorFontSize` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorGroupBoxChildrenIds` (112 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorId` (3794 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorLocation` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorSize` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorStyle` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorTaggedObjectSetIds` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorUUID` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorWrappedFactorId` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorZIndex` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLink` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkBendPoints` (935 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkColor` (644 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkFromDiagramFactorId` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkId` (2839 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkIsBidirectionalLink` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkIsUncertainLink` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkToDiagramFactorId` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkUUID` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkZIndex` (2610 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramPoint` (3841 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramSize` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DirectThreatTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentAccountingClassificationAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExportDetails` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExportTime` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExporterName` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExporterVersion` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExternalApp` (12 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExternalProjectId` (12 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtraData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataItem` (4291 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataItemValue` (4291 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataSection` (20 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FOSProjectData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FOSProjectDataTrainingType` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBox` (112 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxId` (278 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxName` (112 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxUUID` (112 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResult` (731 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultId` (2757 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultName` (731 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultUUID` (731 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}LinkableFactorId` (5220 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProgramId` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProgramName` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProgramTaxonomySetName` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProgramTaxonomySetVersion` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProgramTaxonomySetVersionId` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProgramUrl` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProjectId` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProjectTemplateId` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProjectTemplateName` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProjectUrl` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataProjectVersion` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MiradiShareProjectDataTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OutputTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfiguration` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationDiagramDataInclusion` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationName` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationStrategyObjectiveOrder` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationTargetNodePosition` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationUUID` (15 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectId` (12 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocation` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanning` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningCurrencySymbol` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningDayColumnsVisibility` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningQuarterColumnsVisibility` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectResourceTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScope` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummary` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryExtendedProgressReportIds` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryFactorMode` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryProjectId` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryProjectName` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryShareOutsideOrganization` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryTargetMode` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryThreatRatingMode` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryWorkPlanTimeUnit` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}RareProjectData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentAccountingClassificationAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChain` (113 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainDiagramFactorIds` (113 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainDiagramLinkIds` (113 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainIdentifier` (112 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainName` (113 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainSelectedTaggedObjectSetIds` (113 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainUUID` (113 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Strategy` (467 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyId` (1875 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyName` (458 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyOrderedActivityIds` (419 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyStatus` (467 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyUUID` (467 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressBasedThreatRatingPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Style` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubAssumptionTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Task` (1247 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskDetails` (800 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskIdentifier` (1177 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskName` (1238 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskUUID` (1247 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyClassificationContainer` (8225 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBox` (308 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxId` (308 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxName` (308 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxUUID` (308 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultTaxonomyAssociationPool` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WCSProjectData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WWFProjectData` (11 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WrappedByDiagramFactorId` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}code` (2295 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}height` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}width` (3631 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}x` (3841 total occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}y` (3841 total occurrences)
 
-### Project 2: [Project Name]
+**Total Core Elements:** 173
 
-#### File Information
-- **File Name**: 
-- **Miradi Version**: 
-- **Date Analyzed**: 
-- **File Size**: 
+## Common Elements (Frequently Used)
 
-#### Schema Findings
-- **Elements Found**: 
-- **Relationships Identified**: 
-- **Unique Patterns**: 
-- **Anomalies**: 
+These elements appear in 75% or more of projects:
 
-#### Notes
-- **Data Quality**: 
-- **Completeness**: 
-- **Special Considerations**: 
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationContainer` (4247 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetCalculatedThreatRating` (92 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetDetails` (93 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetIdentifier` (83 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedCosts` (1319 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedEndDate` (2553 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedStartDate` (2553 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWho` (1319 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkGroupedDiagramLinkIds` (901 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Indicator` (715 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorDetails` (151 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorId` (1169 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorIdentifier` (467 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorName` (713 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorPool` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorRelevantActivityIds` (248 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorRelevantStrategyIds` (239 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorUUID` (715 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultIndicatorIds` (248 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReport` (621 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReportId` (621 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReportPool` (9 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReportUUID` (621 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningExpectedEndDate` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningStartDate` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningWorkPlanEndDate` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningWorkPlanStartDate` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryDataEffectiveDate` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Resource` (155 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignment` (4104 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentId` (4104 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentPool` (9 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentResourceId` (4048 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentUUID` (4104 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceGivenName` (154 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceId` (44876 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourcePool` (9 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceResourceType` (155 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceUUID` (155 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainZoomScale` (52 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyDetails` (188 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyIdentifier` (402 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskCalculatedCosts` (980 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskComments` (520 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskResourceAssignmentIds` (990 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Taxonomy` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyAssociation` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyAssociationDescription` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyAssociationLabel` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyAssociationMultiSelect` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyAssociationSelectionType` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyAssociationTaxonomyCode` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyElement` (1666 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyElementDescription` (1666 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyElementLabel` (1666 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyElementUserCode` (1666 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyElements` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyPool` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyTopLevelElementCodeContainer` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyVersion` (49 occurrences, 82% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResult` (150 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultId` (780 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultName` (149 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultPool` (10 occurrences, 91% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultUUID` (150 occurrences, 91% of projects)
 
-## Schema Patterns
+**Total Common Elements:** 65
 
-### Common Elements
+## Optional Elements (Moderately Used)
 
-### Relationship Patterns
+These elements appear in 25-74% of projects:
 
-### Data Quality Issues
+- `a` (30 occurrences, 27% of projects)
+- `b` (140 occurrences, 64% of projects)
+- `i` (93 occurrences, 45% of projects)
+- `li` (227 occurrences, 27% of projects)
+- `ul` (52 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassification` (72 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociation` (16 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationDescription` (16 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationLabel` (16 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationSelectionType` (16 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationSequenceNo` (16 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationTaxonomyCode` (16 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationTaxonomyCode` (72 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationTaxonomyElementCodeContainer` (72 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingCode` (349 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingCodeCode` (349 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingCodeId` (854 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingCodeName` (349 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingCodePool` (5 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingCodeUUID` (349 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionPool` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetCalculatedViabilityFutureStatus` (40 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetCalculatedViabilityStatus` (64 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetComments` (31 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetCurrentStatusJustification` (61 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetEvidenceNotes` (26 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetFutureStatusJustification` (26 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetGoalIds` (51 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetIndicatorIds` (42 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetKeyEcologicalAttributeIds` (56 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetSimpleViabilityFutureStatus` (38 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetSimpleViabilityStatus` (40 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetSpeciesLatinName` (26 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetStressIds` (26 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetSubTargetIds` (28 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseEntries` (159 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseEntry` (675 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseEntryAccountingCodeId` (556 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseEntryDetails` (675 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseTotal` (159 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedTimeframe` (1234 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedTotalBudgetCost` (1236 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkCostTotal` (1235 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntries` (1249 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntry` (34924 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryDetails` (34924 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryResourceId` (34900 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsTotal` (1249 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Cause` (210 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseCalculatedThreatRating` (185 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseDetails` (96 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseId` (1113 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseIdentifier` (70 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseIndicatorIds` (44 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseIsDirectThreat` (126 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseName` (210 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseObjectiveIds` (58 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CausePool` (8 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseUUID` (210 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelComments` (8 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelDetails` (11 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelHiddenTypesContainer` (8 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelIdentifier` (11 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelIsProgressStatusDisplayEnabled` (8 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelIsResultStatusDisplayEnabled` (8 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelIsTaggingEnabled` (8 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelZoomScale` (5 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DateUnitExpense` (1079 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DateUnitTimeframe` (1214 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DateUnitWorkUnits` (52771 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorFontStyle` (2401 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramLinkAnnotation` (897 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Expense` (1079 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignment` (150 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentAccountingCodeId` (117 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentDetails` (146 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentId` (150 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentName` (144 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentPool` (6 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentUUID` (150 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesDateUnit` (1079 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesYear` (1030 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReport` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportDetails` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportId` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportLessonsLearned` (12 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportNextSteps` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportPool` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportProgressDate` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportProgressStatus` (14 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtendedProgressReportUUID` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatus` (23 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusId` (23 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusPool` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusUUID` (23 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Goal` (76 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalDetails` (29 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalEvidenceConfidence` (59 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalEvidenceNotes` (18 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalId` (76 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalIdentifier` (67 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalName` (76 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalPool` (8 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalRelevantActivityIds` (25 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalRelevantIndicatorIds` (72 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalRelevantStrategyIds` (25 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalUUID` (76 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxComments` (99 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxDetails` (99 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GroupBoxIdentifier` (99 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetPool` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorComments` (74 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorEvidenceNotes` (41 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorFutureStatusIds` (22 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorMeasurementIds` (233 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorOrderedMethodIds` (49 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorThreshold` (40 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorThresholds` (49 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorUnit` (69 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorViabilityRatingsComments` (43 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorViabilityRatingsEvidenceConfidence` (676 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorViabilityRatingsEvidenceNotes` (39 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultComments` (328 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultDetails` (329 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultEvidenceNotes` (328 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultIdentifier` (329 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultObjectiveIds` (328 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IntermediateResultResultReportIds` (24 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttribute` (132 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeId` (132 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeIdentifier` (75 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeIndicatorIds` (131 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeKeyEcologicalAttributeType` (90 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeName` (132 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributePool` (5 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeUUID` (132 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Measurement` (263 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementDate` (231 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementDetail` (165 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementEvidenceConfidence` (91 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementEvidenceNotes` (15 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementId` (263 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementMeasurementValue` (47 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementPool` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementRating` (216 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementTrend` (109 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementUUID` (263 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}NumberOfUnits` (52771 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Objective` (133 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveDetails` (22 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveEvidenceConfidence` (122 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveId` (133 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveIdentifier` (96 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveName` (133 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectivePool` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveRelevantActivityIds` (63 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveRelevantIndicatorIds` (77 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveRelevantStrategyIds` (67 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveUUID` (133 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationColumnNamesContainer` (4 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}PlanningViewConfigurationRowObjectTypesContainer` (6 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReportDetails` (468 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReportProgressDate` (617 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressReportProgressStatus` (613 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningFiscalYearStart` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningFullTimeEmployeeDaysPerYear` (6 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningIncludeWorkPlanDiagramData` (8 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningPlanningComments` (6 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeProjectScope` (5 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeProjectVision` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeProtectedAreaCategoryNotes` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeShortProjectScope` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryCalculatedOverallProjectThreatRating` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryCalculatedOverallProjectViabilityFutureRating` (4 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryCalculatedOverallProjectViabilityRating` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryProjectDescription` (7 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryProjectLanguage` (4 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentDetails` (3767 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceComments` (73 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceDateUpdated` (67 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceRoleCodesContainer` (48 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceSurname` (8 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReport` (29 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReportDetails` (24 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReportId` (29 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReportPool` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReportResultDate` (29 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReportResultStatus` (29 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultReportUUID` (29 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainComments` (42 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainDetails` (44 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainExtendedProgressReportIds` (10 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainHiddenTypesContainer` (42 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainIsProgressStatusDisplayEnabled` (42 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainIsResultStatusDisplayEnabled` (42 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResultsChainIsTaggingEnabled` (42 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBox` (4 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxId` (8 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxName` (4 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxPool` (3 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxScopeBoxTypeCode` (4 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxUUID` (4 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRating` (412 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingCalculatedThreatTargetRating` (411 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingComments` (20 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingIrreversibilityRating` (377 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingIsNotApplicable` (412 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingScopeRating` (377 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingSeverityRating` (377 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingTargetId` (412 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingThreatId` (412 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StatusCode` (40 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyCalculatedCosts` (339 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyComments` (90 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyEvidenceConfidence` (377 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyEvidenceNotes` (90 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyExpenseAssignmentIds` (17 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyFeasibilityRating` (398 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyImpactRating` (399 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyIndicatorIds` (90 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyObjectiveIds` (90 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyOutputIds` (90 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyProgressReportIds` (27 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyTimeframe` (324 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyTimeframeIds` (79 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaggedObjectSet` (80 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaggedObjectSetIdentifier` (78 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaggedObjectSetName` (77 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaggedObjectSetPool` (4 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaggedObjectSetUUID` (80 occurrences, 36% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskAssignedLeaderResourceId` (27 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskEvidenceNotes` (501 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskExpenseAssignmentIds` (91 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskIsMonitoringActivity` (513 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskOrderedSubTaskIds` (505 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskOutputIds` (501 occurrences, 55% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskProgressReportIds` (419 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskTimeframe` (910 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaskTimeframeIds` (908 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyClassification` (397 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyClassificationTaxonomyCode` (397 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyClassificationTaxonomyElementCodeContainer` (397 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyElementChildCodeContainer` (341 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxComments` (193 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxDetails` (193 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TextBoxIdentifier` (193 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatId` (466 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultComments` (25 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultDetails` (40 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultEvidenceNotes` (25 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultIdentifier` (27 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultIndicatorIds` (70 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultObjectiveIds` (54 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultRelatedDirectThreatId` (54 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThresholdDetails` (25 occurrences, 27% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Timeframe` (987 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframeDetails` (987 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframeId` (987 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframePool` (8 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframeUUID` (987 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframesDateUnit` (1214 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframesFullProjectTimespan` (596 occurrences, 64% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframesQuarter` (55 occurrences, 45% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframesYear` (547 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsDateUnit` (52771 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsQuarter` (52296 occurrences, 73% of projects)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsYear` (469 occurrences, 73% of projects)
 
-### Version Differences
+**Total Optional Elements:** 267
 
-## Recommendations
+## Rare Elements (Seldom Used)
 
-### Parser Implementation
+These elements appear in less than 25% of projects:
 
-### Validation Rules
+- `ol` (17 occurrences in 1 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Assumption` (2 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionComments` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionDetails` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionEvidenceNotes` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionFutureInformationNeeds` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionId` (2 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionIdentifier` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionImplications` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionName` (2 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionOrderedSubAssumptionIds` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionRelevantIndicatorIds` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionUUID` (2 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetHabitatAssociationContainer` (5 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactor` (6 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorId` (24 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorName` (6 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorPool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorUUID` (6 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResult` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultId` (5 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultIndicatorIds` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultName` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultPool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultResultReportIds` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultUUID` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseEntryFundingSourceId` (43 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryAccountingCodeId` (156 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryFundingSourceId` (128 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseComments` (35 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseEvidenceNotes` (35 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseStandardClassification` (9 occurrences in 2 projects: Malak_Malak_Rangers_v0.77.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CauseStandardClassificationContainer` (9 occurrences in 2 projects: Malak_Malak_Rangers_v0.77.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Comments` (16 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelExtendedProgressReportIds` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DashboardFlagsContainer` (41 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentFundingSourceId` (6 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesDay` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesFullProjectTimespan` (6 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesQuarter` (40 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSource` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceCode` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceComments` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceId` (194 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceName` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourcePool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceUUID` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusComment` (2 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusDate` (19 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusDetails` (9 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusName` (2 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusRating` (7 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusSummary` (19 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GeospatialLocation` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalComments` (17 occurrences in 2 projects: CfC_Adaptive_Management_v0.6.xmpz2, Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalProgressPercentIds` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTarget` (3 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetGoalIds` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetId` (12 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetIdentifier` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetName` (3 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetUUID` (3 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetViabilityMode` (3 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpecies` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpeciesName` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpeciesPool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpeciesUUID` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorPriority` (8 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IndicatorProgressReportIds` (14 occurrences in 2 projects: Garngi_Healthy_Country_Plan_v0.33.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}KeyEcologicalAttributeDetails` (7 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementComments` (10 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MeasurementName` (10 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Method` (11 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodDetails` (10 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodId` (11 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodIdentifier` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodName` (11 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodPool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodUUID` (11 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveComments` (12 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveEvidenceNotes` (11 occurrences in 1 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveProgressPercentIds` (6 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Organization` (6 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationComments` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationEmail` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationGivenName` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationIdentifier` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationName` (6 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationPhoneNumber` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationPool` (2 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationRolesDescription` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationSurname` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationUUID` (6 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Progress` (30 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercent` (8 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentDetails` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentId` (8 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentPercentComplete` (8 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentPercentDate` (8 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentPool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentUUID` (8 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationCountriesContainer` (2 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationLegislativeDistricts` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationLocationDetail` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationMunicipalities` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationProjectLocation` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationSiteMapReference` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationStateAndProvinces` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningBudgetSecuredPercent` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningCurrencyType` (2 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningFinancialComments` (2 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningKeyFundingSources` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningTotalBudgetForFunding` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningWorkUnitRateDescription` (1 occurrences in 1 projects: Mardbalk_HCP_v0.96.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeAccessInformation` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeBiologicalDescription` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeCulturalDescription` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeCurrentLandUses` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeHistoricalDescription` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeHumanPopulation` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeHumanPopulationNotes` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeLegalStatus` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeLegislativeContext` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeManagementResources` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopePhysicalDescription` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeProjectArea` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeProjectAreaNote` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeProtectedAreaCategoriesContainer` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeScopeComments` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeSocialContext` (2 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeSocioEconomicInformation` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeVisitationInformation` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryOtherOrgProjectNumber` (2 occurrences in 2 projects: Malak_Malak_Rangers_v0.77.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryOtherOrgRelatedProjects` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryProjectURL` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentAccountingCodeId` (25 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentFundingSourceId` (17 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceDailyRate` (11 occurrences in 2 projects: Mardbalk_HCP_v0.96.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceEmail` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceIMAddress` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceIMService` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceIdentifier` (22 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceLocation` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceOfficePhoneNumber` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceOrganization` (38 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourcePhoneNumberMobile` (3 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourcePosition` (4 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxComments` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxDetails` (3 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxIdentifier` (1 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingEvidenceConfidence` (6 occurrences in 1 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingEvidenceNotes` (19 occurrences in 2 projects: Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StatusEntry` (41 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyAssignedLeaderResourceId` (5 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyResourceAssignmentIds` (6 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyStandardClassification` (11 occurrences in 2 projects: Malak_Malak_Rangers_v0.77.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyStandardClassificationContainer` (11 occurrences in 2 projects: Malak_Malak_Rangers_v0.77.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Stress` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressCalculatedStressRating` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressDetails` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressId` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressName` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressPool` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressScopeRating` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressSeverityRating` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressUUID` (9 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTarget` (10 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTargetId` (10 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTargetIdentifier` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTargetName` (10 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTargetPool` (2 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTargetUUID` (10 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTaskId` (81 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectDataOtherOrgRelatedProjects` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectDataTNCMarineEcoRegionContainer` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectDataTNCOperatingUnitsContainer` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaggedObjectSetId` (1460 occurrences in 2 projects: CMP_Strategic_Plan_2023-2033_v0.13.xmpz2, Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultResultReportIds` (2 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThresholdValue` (20 occurrences in 2 projects: Miradi_Marine_Example_v0.48.xmpz2, Wardaman_IPA_Rangers_v0.55.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframeName` (48 occurrences in 1 projects: CfC_Adaptive_Management_v0.6.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframesDay` (16 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsDay` (6 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}latitude` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
+- `{http://xml.miradi.org/schema/ConservationProject/248}longitude` (1 occurrences in 1 projects: Miradi_Marine_Example_v0.48.xmpz2)
 
-### Error Handling
+**Total Rare Elements:** 184
 
-### Future Analysis
+## Element Usage Statistics
+
+### Most Frequently Used Elements
+
+| Element | Total Occurrences | Projects Using | Frequency |
+|---------|-------------------|----------------|----------|
+| `{http://xml.miradi.org/schema/ConservationProject/248}DateUnitWorkUnits` | 52771 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsDateUnit` | 52771 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}NumberOfUnits` | 52771 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsQuarter` | 52296 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ResourceId` | 44876 | 9/11 | 82% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntry` | 34924 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryDetails` | 34924 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryResourceId` | 34900 | 8/11 | 73% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyClassificationContainer` | 8225 | 11/11 | 100% |
+| `div` | 6746 | 11/11 | 100% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}LinkableFactorId` | 5220 | 11/11 | 100% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataItem` | 4291 | 11/11 | 100% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataItemValue` | 4291 | 11/11 | 100% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationContainer` | 4247 | 9/11 | 82% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentId` | 4104 | 9/11 | 82% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignment` | 4104 | 9/11 | 82% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentUUID` | 4104 | 9/11 | 82% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentResourceId` | 4048 | 9/11 | 82% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}DiagramPoint` | 3841 | 11/11 | 100% |
+| `{http://xml.miradi.org/schema/ConservationProject/248}x` | 3841 | 11/11 | 100% |
+
+### Project-Specific Elements
+
+Elements that appear in only one project:
+
+**CMP_Strategic_Plan_2023-2033_v0.13.xmpz2:**
+- `ol` (17 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveEvidenceNotes` (11 occurrences)
+
+**CfC_Adaptive_Management_v0.6.xmpz2:**
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframeName` (48 occurrences)
+
+**Conservación_de_Laguna_Costera_en_Venezuela_v1.1.xmpz2:**
+- `{http://xml.miradi.org/schema/ConservationProject/248}ConceptualModelExtendedProgressReportIds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusComment` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FutureStatusName` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeAccessInformation` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeBiologicalDescription` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeCulturalDescription` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeCurrentLandUses` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeHistoricalDescription` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeLegalStatus` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeLegislativeContext` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeManagementResources` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopePhysicalDescription` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeSocioEconomicInformation` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectScopeVisitationInformation` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxComments` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ScopeBoxIdentifier` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SimpleThreatRatingEvidenceConfidence` (6 occurrences)
+
+**Mardbalk_HCP_v0.96.xmpz2:**
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningWorkUnitRateDescription` (1 occurrences)
+
+**Miradi_Marine_Example_v0.48.xmpz2:**
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionComments` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionDetails` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionEvidenceNotes` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionFutureInformationNeeds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionIdentifier` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionImplications` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionOrderedSubAssumptionIds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}AssumptionRelevantIndicatorIds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiodiversityTargetHabitatAssociationContainer` (5 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactor` (6 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorId` (24 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorName` (6 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorPool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalFactorUUID` (6 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResult` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultId` (5 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultIndicatorIds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultName` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultPool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultResultReportIds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}BiophysicalResultUUID` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedExpenseEntryFundingSourceId` (43 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryAccountingCodeId` (156 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}CalculatedWorkUnitsEntryFundingSourceId` (128 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Comments` (16 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}DashboardFlagsContainer` (41 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpenseAssignmentFundingSourceId` (6 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesDay` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExpensesQuarter` (40 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSource` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceCode` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceComments` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceId` (194 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceName` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourcePool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}FundingSourceUUID` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GeospatialLocation` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}GoalProgressPercentIds` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetGoalIds` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}HumanWellbeingTargetIdentifier` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpecies` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpeciesName` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpeciesPool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}IUCNRedListSpeciesUUID` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Method` (11 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodDetails` (10 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodId` (11 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodIdentifier` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodName` (11 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodPool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}MethodUUID` (11 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ObjectiveProgressPercentIds` (6 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationComments` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationEmail` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationGivenName` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationIdentifier` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationPhoneNumber` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationRolesDescription` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}OrganizationSurname` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Progress` (30 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercent` (8 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentDetails` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentId` (8 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentPercentComplete` (8 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentPercentDate` (8 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentPool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProgressPercentUUID` (8 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationLegislativeDistricts` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationLocationDetail` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationMunicipalities` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationProjectLocation` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationSiteMapReference` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectLocationStateAndProvinces` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningBudgetSecuredPercent` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningKeyFundingSources` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectPlanningTotalBudgetForFunding` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryOtherOrgRelatedProjects` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ProjectSummaryProjectURL` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentAccountingCodeId` (25 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceAssignmentFundingSourceId` (17 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceEmail` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceIMAddress` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceIMService` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceLocation` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourceOfficePhoneNumber` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourcePhoneNumberMobile` (3 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ResourcePosition` (4 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StatusEntry` (41 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StrategyAssignedLeaderResourceId` (5 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}Stress` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressCalculatedStressRating` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressDetails` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressId` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressName` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressPool` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressScopeRating` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressSeverityRating` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}StressUUID` (9 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}SubTargetIdentifier` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectDataOtherOrgRelatedProjects` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectDataTNCMarineEcoRegionContainer` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TNCProjectDataTNCOperatingUnitsContainer` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}ThreatReductionResultResultReportIds` (2 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}TimeframesDay` (16 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}WorkUnitsDay` (6 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}latitude` (1 occurrences)
+- `{http://xml.miradi.org/schema/ConservationProject/248}longitude` (1 occurrences)
+
+## Recommendations for Parser Implementation
+
+### Priority 1: Core Elements
+Implement parsers for all core elements first, as they appear in every project:
+- 173 elements to implement
+- These represent the essential Miradi schema
+- Required for basic project functionality
+
+### Priority 2: Common Elements
+Implement parsers for common elements to support most use cases:
+- 65 additional elements
+- Will support 75%+ of project features
+- Good return on investment for development effort
+
+### Priority 3: Optional Elements
+Consider implementing based on specific user needs:
+- 267 elements with moderate usage
+- Implement based on user feedback and requirements
+- May be project-type or workflow specific
+
+### Priority 4: Rare Elements
+Implement only if specifically required:
+- 184 elements with limited usage
+- May be legacy, experimental, or highly specialized
+- Consider graceful handling rather than full parsing
+
+## Validation Rules Discovered
+
+### Required Elements (Core Schema)
+These elements should be considered required in any Miradi project:
+
+- `{http://xml.miradi.org/schema/ConservationProject/248}TaxonomyClassificationContainer`: Average 747.7 per project
+- `div`: Average 613.3 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}LinkableFactorId`: Average 474.5 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataItem`: Average 390.1 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}ExtraDataItemValue`: Average 390.1 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramPoint`: Average 349.2 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}x`: Average 349.2 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}y`: Average 349.2 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactorId`: Average 344.9 per project
+- `{http://xml.miradi.org/schema/ConservationProject/248}DiagramFactor`: Average 330.1 per project
+
+### Optional Elements Patterns
+Elements that may be optional based on project type or complexity:
+
+- `a`: Used in 27% of projects
+- `b`: Used in 64% of projects
+- `i`: Used in 45% of projects
+- `li`: Used in 27% of projects
+- `ul`: Used in 27% of projects
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassification`: Used in 36% of projects
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociation`: Used in 73% of projects
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationDescription`: Used in 73% of projects
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationLabel`: Used in 73% of projects
+- `{http://xml.miradi.org/schema/ConservationProject/248}AccountingClassificationAssociationSelectionType`: Used in 73% of projects
+
+## Future Analysis Recommendations
+
+1. **Version Analysis**: Track how element usage changes across Miradi versions
+2. **Project Type Analysis**: Categorize projects and analyze element usage by type
+3. **Attribute Analysis**: Examine which attributes are required vs optional for each element
+4. **Relationship Analysis**: Map parent-child relationships and their consistency
+5. **Data Quality Analysis**: Identify common data quality issues and validation needs
+
+## Analysis Methodology
+
+### Data Collection
+- Extracted and analyzed XML structure from .xmpz2 files
+- Counted element occurrences across all projects
+- Tracked which projects contain each element type
+- Recorded element attributes and hierarchical relationships
+
+### Categorization Criteria
+- **Core**: Present in 100% of projects
+- **Common**: Present in 75-99% of projects
+- **Optional**: Present in 25-74% of projects
+- **Rare**: Present in <25% of projects
+
+### Tools Used
+- Custom Python schema explorer
+- XML parsing with ElementTree
+- Statistical analysis of element frequency
+- Cross-project comparison algorithms
+
