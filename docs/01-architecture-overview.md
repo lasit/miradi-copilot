@@ -1,387 +1,445 @@
 # Miradi Co-Pilot Architecture Overview
 
-## System Purpose
+## System Overview
 
-Miradi Co-Pilot is an intelligent assistant system designed to process and analyze Miradi conservation project files, enabling users to query complex project data through natural language interactions. The system transforms structured Miradi project data into a graph-based knowledge representation, allowing for sophisticated relationship analysis and context-aware responses using GraphRAG (Graph Retrieval-Augmented Generation) techniques.
+Miradi Co-Pilot is a GraphRAG-powered natural language interface for Miradi conservation projects. The system transforms Miradi XML/JSON files into an intelligent Neo4j graph database, enabling sophisticated conservation planning analysis through graph relationships and AI-powered querying.
 
-The primary goals of the system are to:
-- **Simplify Data Access**: Enable non-technical users to query complex conservation project data using natural language
-- **Enhance Insights**: Leverage graph relationships to provide deeper insights into project interconnections
-- **Improve Decision Making**: Provide contextual, relationship-aware responses that consider the full project ecosystem
-- **Scale Knowledge**: Handle multiple Miradi projects and enable cross-project analysis
+## Current Implementation Status
 
-## High-Level Architecture
+### ✅ **Fully Implemented Components**
+- **ETL Pipeline**: Complete Miradi parsing and Neo4j loading
+- **Graph Data Model**: Conservation-specific nodes and relationships
+- **Neo4j Integration**: Batch loading, constraints, and indexes
+- **Project Management**: Single-project mode with switching capabilities
+- **Analysis Tools**: Comprehensive project analysis without database loading
+- **Conservation Relationships**: THREATENS, MITIGATES, CONTRIBUTES_TO, ENHANCES, IMPLEMENTS
 
-The system follows a modern 3-tier architecture pattern optimized for graph-based data processing and AI-powered querying:
+### 🚧 **In Development**
+- **GraphRAG Engine**: Graph-aware query generation
+- **Natural Language Interface**: LLM integration for conservation queries
 
-### Data Tier
-- **Neo4j Graph Database**: Stores Miradi project data as interconnected nodes and relationships
-- **File Storage**: Raw Miradi files and processed artifacts
-- **Vector Embeddings**: Graph-aware embeddings for semantic search
+### 📋 **Planned Components**
+- **FastAPI Backend**: RESTful API endpoints
+- **Streamlit Frontend**: Web-based user interface
+- **Multi-project Analysis**: Cross-project conservation insights
 
-### API Tier
-- **FastAPI Application**: RESTful API for data ingestion, processing, and querying
-- **ETL Pipeline**: Processes Miradi files and populates the graph database
-- **GraphRAG Engine**: Combines graph traversal with LLM capabilities for intelligent responses
+## System Architecture
 
-### Presentation Tier
-- **Streamlit UI**: Interactive web interface for file uploads and natural language querying
-- **Visualization Components**: Graph visualizations and project insights dashboards
+### Current 3-Tier Implementation
 
-### Technology Choices and Rationale
-
-| Component | Technology | Rationale |
-|-----------|------------|-----------|
-| **Database** | Neo4j | Native graph operations, ACID compliance, Cypher query language |
-| **API Framework** | FastAPI | High performance, automatic API documentation, async support |
-| **UI Framework** | Streamlit | Rapid prototyping, data science friendly, minimal frontend complexity |
-| **Language** | Python 3.11+ | Rich ecosystem for data processing and AI/ML libraries |
-| **Containerization** | Docker | Consistent deployment, easy Neo4j setup, environment isolation |
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    PRESENTATION TIER                        │
+├─────────────────────────────────────────────────────────────┤
+│  • Command-Line Tools (load_project.py, switch_project.py) │
+│  • Analysis Scripts (analyze_all_projects.py)              │
+│  • Project Management (PROJECT nodes with metadata)        │
+└─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      API/LOGIC TIER                        │
+├─────────────────────────────────────────────────────────────┤
+│  • MiradiParser (src/etl/miradi_parser.py)                │
+│  • MiradiToGraphMapper (src/etl/schema_mapper.py)         │
+│  • Neo4jLoader (src/etl/neo4j_loader.py)                  │
+│  • Conservation Logic (relationship mapping)               │
+└─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────┐
+│                       DATA TIER                            │
+├─────────────────────────────────────────────────────────────┤
+│  • Neo4j Graph Database (conservation nodes & relationships)│
+│  • Miradi Project Files (.xmpz2 archives)                 │
+│  • Project Metadata (PROJECT nodes with load statistics)   │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Core Components
 
-### 1. ETL Pipeline
-**Purpose**: Transform Miradi XML/JSON files into graph structures suitable for Neo4j storage.
+### 1. MiradiParser (`src/etl/miradi_parser.py`)
 
-**Design Principles**:
-- **Incremental Processing**: Handle updates to existing projects without full reprocessing
-- **Schema Validation**: Ensure data integrity during transformation
-- **Relationship Mapping**: Preserve and enhance relationships between Miradi entities
-- **Metadata Enrichment**: Add processing timestamps, data lineage, and quality metrics
-
-**Key Responsibilities**:
-- Parse Miradi file formats (XML, JSON)
-- Extract entities (projects, strategies, results chains, etc.)
-- Map relationships between entities
-- Generate graph-optimized data structures
-- Handle data validation and error recovery
-
-### 2. Graph Database (Neo4j)
-**Why Neo4j**: 
-- **Native Graph Processing**: Optimized for relationship traversal and pattern matching
-- **Cypher Query Language**: Intuitive graph query syntax
-- **ACID Compliance**: Ensures data consistency for complex operations
-- **Scalability**: Handles large, interconnected datasets efficiently
-- **Visualization**: Built-in graph visualization capabilities
-
-**Schema Design**:
-- **Node Types**: Project, Strategy, Result, Threat, Target, Activity, etc.
-- **Relationship Types**: CONTRIBUTES_TO, ADDRESSES, DEPENDS_ON, PART_OF, etc.
-- **Properties**: Rich metadata on both nodes and relationships
-- **Indexes**: Optimized for common query patterns
-
-### 3. RAG System (GraphRAG Approach)
-**GraphRAG vs Traditional RAG**:
-- **Context Awareness**: Leverages graph relationships for richer context
-- **Multi-hop Reasoning**: Follows relationship chains for complex queries
-- **Structured Knowledge**: Combines structured graph data with unstructured text
-- **Relationship-Aware Retrieval**: Retrieves not just similar content but related entities
-
-**Architecture**:
-- **Graph Traversal**: Uses Cypher queries to explore relevant subgraphs
-- **Embedding Generation**: Creates graph-aware embeddings for semantic search
-- **Context Assembly**: Combines graph structure with textual content
-- **LLM Integration**: Provides structured context to language models
-
-### 4. API Layer (FastAPI)
-**Design Philosophy**: Clean, async-first API design with comprehensive documentation and type safety.
-
-**Key Endpoints**:
-- **File Management**: Upload, process, and manage Miradi files
-- **Graph Operations**: Query and manipulate graph data
-- **RAG Interface**: Natural language query processing
-- **Analytics**: Project insights and relationship analysis
-
-**Features**:
-- **Automatic Documentation**: OpenAPI/Swagger integration
-- **Type Safety**: Pydantic models for request/response validation
-- **Async Support**: Non-blocking operations for file processing
-- **Error Handling**: Comprehensive error responses and logging
-
-### 5. UI Layer (Streamlit)
-**Why Streamlit**:
-- **Rapid Development**: Quick iteration for data science applications
-- **Python Native**: Seamless integration with backend logic
-- **Interactive Components**: Built-in widgets for file uploads and visualizations
-- **Minimal Frontend Complexity**: Focus on functionality over UI complexity
+**Purpose**: Extracts conservation elements from Miradi XML/JSON files.
 
 **Key Features**:
-- **File Upload Interface**: Drag-and-drop Miradi file processing
-- **Natural Language Query**: Chat-like interface for project questions
-- **Graph Visualization**: Interactive project relationship displays
-- **Results Dashboard**: Structured presentation of query results
+- **173 Must-Support Elements**: Complete implementation of core Miradi elements
+- **ZIP Archive Processing**: Handles .xmpz2 files automatically
+- **Configurable Unknown Element Handling**: LOG, ERROR, STORE, or IGNORE strategies
+- **Comprehensive Validation**: Ensures data integrity and required elements
+- **XML Namespace Support**: Correctly processes Miradi's namespaced XML
 
-## Data Flow Overview
-
-```mermaid
-graph TD
-    A[Miradi File Upload] --> B[ETL Pipeline]
-    B --> C[Data Validation]
-    C --> D[Graph Transformation]
-    D --> E[Neo4j Storage]
-    
-    F[User Query] --> G[Query Processing]
-    G --> H[Graph Traversal]
-    H --> I[Context Assembly]
-    I --> J[LLM Processing]
-    J --> K[Response Generation]
-    K --> L[User Interface]
-    
-    E --> H
-    
-    subgraph "ETL Process"
-        B
-        C
-        D
-    end
-    
-    subgraph "GraphRAG Process"
-        G
-        H
-        I
-        J
-    end
-    
-    subgraph "Storage Layer"
-        E
-        M[Vector Embeddings]
-        N[File Storage]
-    end
-    
-    D --> M
-    A --> N
-```
-
-### Detailed Flow Steps
-
-1. **File Ingestion**: User uploads Miradi file through Streamlit interface
-2. **ETL Processing**: FastAPI receives file, validates format, and triggers ETL pipeline
-3. **Graph Population**: Processed data is stored in Neo4j with proper relationships
-4. **Query Processing**: User submits natural language query
-5. **Graph Traversal**: System identifies relevant subgraph using Cypher queries
-6. **Context Assembly**: Combines graph structure with textual content
-7. **LLM Integration**: Structured context is provided to language model
-8. **Response Generation**: AI generates contextually aware response
-9. **Result Presentation**: Response is displayed with supporting visualizations
-
-## Key Design Decisions
-
-### Why Graph Database Over Relational?
-
-**Relationship-First Modeling**:
-- Miradi projects are inherently relationship-heavy (strategies → results → threats)
-- Graph databases excel at traversing complex relationship networks
-- JOIN operations in SQL become expensive with deep relationship queries
-- Graph queries (Cypher) are more intuitive for relationship-based questions
-
-**Performance Benefits**:
-- Constant-time relationship traversal regardless of data size
-- No need for complex JOIN operations
-- Optimized for pattern matching and path finding
-- Better performance for "friends of friends" type queries
-
-### Why GraphRAG Over Traditional RAG?
-
-**Enhanced Context Understanding**:
-- Traditional RAG relies on semantic similarity alone
-- GraphRAG incorporates structural relationships for richer context
-- Better handling of multi-entity queries
-- Improved accuracy for complex, interconnected questions
-
-**Structured Knowledge Integration**:
-- Combines the best of structured (graph) and unstructured (text) data
-- Maintains data relationships during retrieval
-- Enables reasoning across multiple relationship hops
-- Provides explainable AI through graph paths
-
-### Scalability Considerations
-
-**Horizontal Scaling**:
-- Neo4j clustering for database scalability
-- FastAPI supports async operations and can be load-balanced
-- Streamlit can be deployed behind reverse proxy for multiple instances
-- Containerized architecture enables cloud deployment
-
-**Performance Optimization**:
-- Graph indexes on frequently queried properties
-- Caching layer for common queries
-- Batch processing for large file uploads
-- Async processing for long-running ETL operations
-
-**Data Management**:
-- Incremental updates to avoid full reprocessing
-- Data versioning for project evolution tracking
-- Automated backup and recovery procedures
-- Monitoring and alerting for system health
-
-## Component Relationships
-
-```mermaid
-graph TB
-    subgraph "Presentation Layer"
-        UI[Streamlit UI]
-    end
-    
-    subgraph "API Layer"
-        API[FastAPI Application]
-        ETL[ETL Pipeline]
-        RAG[GraphRAG Engine]
-    end
-    
-    subgraph "Data Layer"
-        NEO[Neo4j Database]
-        FILES[File Storage]
-        EMBED[Vector Store]
-    end
-    
-    subgraph "External Services"
-        LLM[Language Model API]
-    end
-    
-    UI --> API
-    API --> ETL
-    API --> RAG
-    ETL --> NEO
-    ETL --> FILES
-    ETL --> EMBED
-    RAG --> NEO
-    RAG --> EMBED
-    RAG --> LLM
-    
-    classDef presentation fill:#e1f5fe
-    classDef api fill:#f3e5f5
-    classDef data fill:#e8f5e8
-    classDef external fill:#fff3e0
-    
-    class UI presentation
-    class API,ETL,RAG api
-    class NEO,FILES,EMBED data
-    class LLM external
-```
-
-This architecture provides a robust, scalable foundation for intelligent analysis of Miradi conservation projects, leveraging modern graph database technology and AI capabilities to deliver meaningful insights to conservation professionals.
-
-## Implementation Status
-
-### Schema Analysis Results
-
-The foundation of our parser implementation is based on comprehensive empirical analysis of real-world Miradi conservation projects:
-
-- **Projects Analyzed**: 11 diverse conservation projects from different organizations and regions
-- **Unique Elements Discovered**: 689 distinct XML element types across all projects
-- **Total Element Instances**: 619,358 individual elements processed and analyzed
-- **Schema Coverage**: Complete mapping of element frequency and usage patterns
-
-**4-Tier Implementation Strategy**:
-- **Must-Support (173 elements)**: Found in 100% of projects - essential for basic functionality
-- **Should-Support (65 elements)**: Found in 75%+ of projects - high-value features
-- **Optional (267 elements)**: Found in 25-74% of projects - conditional implementation
-- **Edge Cases (184 elements)**: Found in <25% of projects - special handling required
-
-This empirical approach ensures our parser can handle the full spectrum of real-world Miradi projects while prioritizing development effort for maximum impact. Detailed analysis and implementation guidance is available in [docs/schemas/parser-requirements.md](schemas/parser-requirements.md).
-
-### Parser Implementation
-
-The **MiradiParser** class has been fully implemented with comprehensive support for Miradi project files:
-
-**Core Features**:
-- **173 Must-Support Elements**: Complete implementation of all elements found in every analyzed project
-- **Configurable Unknown Element Handling**: Four strategies for handling unexpected elements:
-  - `LOG`: Log warnings and continue processing
-  - `ERROR`: Raise exceptions for unknown elements
-  - `STORE`: Preserve unknown elements for future analysis
-  - `IGNORE`: Silently skip unknown elements
-- **Comprehensive Validation**: Validates presence of required elements and data integrity
-- **XML Namespace Support**: Correctly handles Miradi's XML namespace conventions
-- **ZIP File Processing**: Automatically extracts and processes .xmpz2 files
-
-**Parser Architecture**:
+**Core Methods**:
 ```python
-# Abstract base class defining extraction interface
-class BaseParser(ABC):
-    def extract_project_metadata(self, root: ET.Element) -> Dict[str, Any]
+class MiradiParser:
+    def parse_all(self, file_path: str) -> Dict[str, Any]
     def extract_conservation_targets(self, root: ET.Element) -> List[ParsedElement]
     def extract_threats(self, root: ET.Element) -> List[ParsedElement]
     def extract_strategies(self, root: ET.Element) -> List[ParsedElement]
     def extract_activities(self, root: ET.Element) -> List[ParsedElement]
     def extract_results_chains(self, root: ET.Element) -> List[ParsedElement]
     def extract_conceptual_models(self, root: ET.Element) -> List[ParsedElement]
-    def parse_all(self, file_path: Union[str, Path]) -> Dict[str, Any]
-
-# Concrete implementation with 173 must-support elements
-class MiradiParser(BaseParser):
-    # Full implementation with configurable options
+    def extract_diagram_factors(self, root: ET.Element) -> List[ParsedElement]
+    def extract_diagram_links(self, root: ET.Element) -> List[ParsedElement]
+    def get_parsing_summary(self) -> Dict[str, Any]
 ```
 
-**Command-Line Interface**:
-```bash
-# Basic parsing
-python src/etl/miradi_parser.py project.xmpz2
+**Statistics from Real Projects**:
+- **11 projects analyzed**: 8,488 total elements parsed
+- **100% schema coverage**: All known elements successfully processed
+- **689 unique element types**: Comprehensive Miradi schema understanding
 
-# Advanced options with custom handling
-python src/etl/miradi_parser.py project.xmpz2 \
-    --output results.json \
-    --unknown-handling store \
-    --summary-only
-```
+### 2. MiradiToGraphMapper (`src/etl/schema_mapper.py`)
 
-**Error Handling & Validation**:
-- **Required Element Validation**: Ensures presence of 7 critical elements for basic functionality
-- **Schema Compliance**: Validates against empirically-derived element requirements
-- **Graceful Degradation**: Continues processing even when encountering unknown elements
-- **Detailed Error Messages**: Provides actionable feedback for parsing failures
-- **File Format Validation**: Validates ZIP structure and XML format before processing
+**Purpose**: Converts parsed Miradi data into graph nodes and relationships.
 
-### Current Capabilities
+**Key Features**:
+- **Conservation Domain Logic**: Maps Miradi concepts to graph structures
+- **Relationship Discovery**: Extracts conservation relationships from diagram data
+- **Node Type Mapping**: Converts Miradi elements to typed graph nodes
+- **UUID Preservation**: Maintains referential integrity across transformations
+- **Validation**: Ensures graph consistency and relationship validity
 
-The implemented parser provides comprehensive Miradi project processing capabilities:
-
-**File Processing**:
-- **Universal Compatibility**: Can parse any standard Miradi .xmpz2 file
-- **Robust Extraction**: Handles all core conservation elements (targets, strategies, threats, results)
-- **Metadata Preservation**: Maintains project metadata, UUIDs, and referential integrity
-- **Rich Data Structures**: Extracts hierarchical relationships and nested element data
-
-**Conservation Element Extraction**:
-- **Biodiversity Targets**: Complete extraction with IDs, names, UUIDs, and viability data
-- **Conservation Strategies**: Full strategy data including activities and implementation details
-- **Activities (Tasks)**: Comprehensive activity extraction with identifiers and relationships
-- **Threats and Causes**: Comprehensive threat analysis with ratings and relationships
-- **Results Chains**: Complete results chain structure with diagram relationships
-- **Conceptual Models**: Full conceptual model data with factor and link information
-- **Project Metadata**: Essential project information and configuration settings
-
-**Technical Capabilities**:
-- **XML Namespace Handling**: Correctly processes Miradi's namespaced XML structure
-- **ZIP Archive Processing**: Seamlessly extracts and processes .xmpz2 archive files
-- **Memory Efficient**: Processes large projects without excessive memory usage
-- **Statistics Tracking**: Comprehensive parsing statistics and element coverage metrics
-- **Type Safety**: Full type annotations for better IDE support and error prevention
-
-**Parsing Statistics & Coverage**:
+**Core Methods**:
 ```python
-# Example parsing summary
-{
-    'total_elements': 15420,
-    'element_breakdown': {
-        'must_support': 12890,     # 83.6% coverage
-        'should_support': 1890,    # 12.3% coverage
-        'optional': 520,           # 3.4% coverage
-        'edge_case': 85,           # 0.6% coverage
-        'unknown': 35              # 0.2% coverage
-    },
-    'coverage': {
-        'must_support_coverage': 83.6,
-        'known_element_coverage': 99.8
-    }
-}
+class MiradiToGraphMapper:
+    def map_project_to_graph(self, parsed_data: Dict[str, Any]) -> GraphConversionResult
+    def map_conservation_targets(self, targets: List[ParsedElement]) -> List[MiradiNode]
+    def map_threats(self, threats: List[ParsedElement]) -> List[MiradiNode]
+    def map_strategies(self, strategies: List[ParsedElement]) -> List[MiradiNode]
+    def map_activities(self, activities: List[ParsedElement]) -> List[MiradiNode]
+    def map_results(self, results: List[ParsedElement]) -> List[MiradiNode]
+    def extract_conservation_relationships(self, parsed_data: Dict[str, Any]) -> List[MiradiRelationship]
 ```
 
-**Integration Ready**:
-- **Neo4j Preparation**: Extracted data structures are optimized for graph database storage
-- **Relationship Mapping**: Preserves all entity relationships for graph representation
-- **UUID Preservation**: Maintains referential integrity for cross-entity relationships
-- **Extensible Design**: Easy to add new extraction methods for additional element types
-- **Error Recovery**: Robust error handling ensures partial parsing success even with data issues
+**Conservation Relationship Logic**:
+```python
+# Threat-Target relationships from conceptual models
+if source_type == "DirectThreat" and target_type == "Target":
+    relationship_type = RelationshipType.THREATENS
 
-The parser implementation provides a solid foundation for the ETL pipeline, enabling reliable transformation of Miradi conservation projects into graph-ready data structures for Neo4j storage and GraphRAG processing.
+# Strategy-Threat mitigation from results chains  
+elif source_type == "Strategy" and target_type == "DirectThreat":
+    relationship_type = RelationshipType.MITIGATES
+
+# Strategy-Result contribution from results chains
+elif source_type == "Strategy" and target_type in ["Result", "IntermediateResult"]:
+    relationship_type = RelationshipType.CONTRIBUTES_TO
+
+# Result-Target enhancement from results chains
+elif source_type in ["Result", "IntermediateResult"] and target_type == "Target":
+    relationship_type = RelationshipType.ENHANCES
+
+# Activity-Strategy implementation
+elif source_type == "Task" and target_type == "Strategy":
+    relationship_type = RelationshipType.IMPLEMENTS
+```
+
+### 3. Neo4jLoader (`src/etl/neo4j_loader.py`)
+
+**Purpose**: Handles database operations, constraints, and batch loading.
+
+**Key Features**:
+- **Batch Operations**: Efficient loading of large datasets (1000 items per batch)
+- **Constraint Management**: Automatic UUID uniqueness constraints
+- **Index Creation**: Performance indexes on id, name, node_type properties
+- **Transaction Management**: ACID compliance for data integrity
+- **Error Handling**: Graceful failure handling with detailed error reporting
+
+**Core Methods**:
+```python
+class Neo4jLoader:
+    def __init__(self, connection: Neo4jConnection, batch_size: int = 1000)
+    def create_constraints(self) -> Dict[str, bool]
+    def create_indexes(self) -> Dict[str, bool]
+    def load_nodes(self, nodes: List[MiradiNode]) -> Dict[str, Any]
+    def load_relationships(self, relationships: List[MiradiRelationship]) -> Dict[str, Any]
+    def load_project(self, project_file: str, **kwargs) -> Dict[str, Any]
+    def clear_database(self, confirm: bool = False) -> bool
+```
+
+**Performance Optimizations**:
+- **Batch Size**: Configurable batch size (default: 1000)
+- **Connection Pooling**: Managed by Neo4j driver
+- **Parallel Processing**: Concurrent node and relationship loading
+- **Memory Management**: Streaming processing for large projects
+
+### 4. Neo4jConnection (`src/graph/neo4j_connection.py`)
+
+**Purpose**: Manages database connections and query execution.
+
+**Key Features**:
+- **Connection Management**: Automatic connection handling with retry logic
+- **Query Execution**: Support for read and write queries with parameters
+- **Error Handling**: Comprehensive error handling and logging
+- **Context Manager**: Automatic resource cleanup
+
+**Core Methods**:
+```python
+class Neo4jConnection:
+    def connect(self) -> None
+    def close(self) -> None
+    def check_connection(self) -> bool
+    def execute_query(self, query: str, parameters: Dict = None) -> List[Dict]
+    def execute_write_query(self, query: str, parameters: Dict = None) -> List[Dict]
+```
+
+## Data Flow
+
+### ETL Pipeline Flow
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Miradi File   │───▶│  MiradiParser   │───▶│ Parsed Elements │
+│   (.xmpz2)      │    │                 │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                                        │
+                                                        ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Neo4j Graph   │◀───│   Neo4jLoader   │◀───│ Graph Mapper    │
+│   Database      │    │                 │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### Detailed Processing Steps
+
+1. **File Validation**: Verify .xmpz2 format and extract XML content
+2. **XML Parsing**: Parse Miradi XML with namespace handling
+3. **Element Extraction**: Extract conservation elements using specialized methods
+4. **Data Validation**: Validate required elements and data integrity
+5. **Graph Mapping**: Convert parsed elements to graph nodes and relationships
+6. **Relationship Discovery**: Extract conservation relationships from diagram data
+7. **Database Preparation**: Create constraints and indexes in Neo4j
+8. **Batch Loading**: Load nodes and relationships in optimized batches
+9. **Metadata Storage**: Store project metadata in PROJECT node
+10. **Validation**: Verify successful loading and relationship integrity
+
+## Graph Schema
+
+### Node Types (with typical counts from Bulgul Rangers project)
+
+| Node Type | Count | Description |
+|-----------|-------|-------------|
+| `CONSERVATION_TARGET` | 12 | Biodiversity targets and conservation objects |
+| `DIRECT_THREAT` | 8 | Threats directly impacting conservation targets |
+| `CONTRIBUTING_FACTOR` | 15 | Indirect factors contributing to threats |
+| `STRATEGY` | 18 | Conservation strategies and interventions |
+| `ACTIVITY` | 45 | Specific activities implementing strategies |
+| `RESULT` | 25 | Expected outcomes from strategies |
+| `CONCEPTUAL_MODEL` | 3 | Conceptual models showing threat-target relationships |
+| `RESULTS_CHAIN` | 8 | Results chains linking strategies to outcomes |
+| `DIAGRAM_FACTOR` | 892 | Visual elements in conceptual models |
+| `DIAGRAM_LINK` | 341 | Connections between diagram elements |
+| `PROJECT` | 1 | Project metadata and loading information |
+
+### Relationship Types (with counts from Bulgul Rangers project)
+
+| Relationship | Count | Description |
+|--------------|-------|-------------|
+| `THREATENS` | 95 | Direct threat impacts conservation target |
+| `MITIGATES` | 83 | Strategy reduces or eliminates threat |
+| `CONTRIBUTES_TO` | 86 | Strategy produces specific result |
+| `ENHANCES` | 79 | Result improves conservation target |
+| `IMPLEMENTS` | 191 | Activity executes strategy |
+| `BELONGS_TO_PROJECT` | 1,366 | Element belongs to project |
+| `PART_OF` | 582 | Element is part of larger structure |
+| `LINKS` | 872 | General diagram connections |
+
+### Conservation Logic Relationships
+
+The system implements core conservation planning logic through graph relationships:
+
+```cypher
+// Threat-Target Impact Chain
+(threat:DIRECT_THREAT)-[:THREATENS]->(target:CONSERVATION_TARGET)
+
+// Strategy-Threat Mitigation Chain  
+(strategy:STRATEGY)-[:MITIGATES]->(threat:DIRECT_THREAT)
+
+// Strategy-Result-Target Enhancement Chain
+(strategy:STRATEGY)-[:CONTRIBUTES_TO]->(result:RESULT)-[:ENHANCES]->(target:CONSERVATION_TARGET)
+
+// Activity-Strategy Implementation Chain
+(activity:ACTIVITY)-[:IMPLEMENTS]->(strategy:STRATEGY)
+
+// Complete Conservation Logic Chain
+(activity:ACTIVITY)-[:IMPLEMENTS]->(strategy:STRATEGY)-[:MITIGATES]->(threat:DIRECT_THREAT)-[:THREATENS]->(target:CONSERVATION_TARGET)
+```
+
+## Project Management
+
+### Single-Project Mode Design
+
+The system implements a single-project mode for clean data separation:
+
+**Design Rationale**:
+- **Data Integrity**: Prevents mixing of conservation data from different projects
+- **Performance**: Optimized queries without project filtering overhead
+- **Simplicity**: Clear mental model for users working with one project at a time
+- **Flexibility**: Easy switching between projects without data conflicts
+
+**PROJECT Node Schema**:
+```cypher
+CREATE (p:PROJECT {
+  id: 'current_project',
+  name: 'Bulgul Rangers',
+  filename: 'Bulgul_Rangers_v0.111.xmpz2',
+  file_path: 'data/sample_projects/Bulgul_Rangers_v0.111.xmpz2',
+  loaded_at: datetime(),
+  nodes_count: 1367,
+  relationships_count: 3194,
+  elements_parsed: 1373,
+  schema_coverage: 100.0,
+  load_time: 13.4
+})
+```
+
+**Project Switching Process**:
+1. **Clear Database**: Remove all existing nodes and relationships
+2. **Load New Project**: Parse and load the target project
+3. **Update Metadata**: Store new project information in PROJECT node
+4. **Verify Integrity**: Confirm successful loading and relationship creation
+
+## Command-Line Interface
+
+### Project Loading (`load_project.py`)
+
+```bash
+# Load project with database clearing
+python load_project.py data/sample_projects/Bulgul_Rangers_v0.111.xmpz2 --clear
+
+# Load project without clearing (append mode)
+python load_project.py data/sample_projects/Miradi_Marine_Example_v0.48.xmpz2
+```
+
+**Features**:
+- **Clean Output**: Suppressed validation warnings for better UX
+- **Progress Tracking**: Real-time loading progress with statistics
+- **Error Handling**: Helpful troubleshooting messages
+- **Metadata Storage**: Automatic project metadata tracking
+
+### Project Management (`switch_project.py`)
+
+```bash
+# Show current project status and available projects
+python switch_project.py
+
+# Switch to a different project
+python switch_project.py "Miradi Marine"
+
+# List available projects only
+python switch_project.py --list
+```
+
+**Features**:
+- **Current Status**: Shows loaded project with metadata
+- **Available Projects**: Lists all .xmpz2 files in data/sample_projects/
+- **Smart Matching**: Supports exact name, filename, or partial matching
+- **Automatic Switching**: Handles clear + load process seamlessly
+
+### Project Analysis (`analyze_all_projects.py`)
+
+```bash
+# Basic analysis of all projects
+python analyze_all_projects.py
+
+# Detailed analysis with error reporting
+python analyze_all_projects.py --detailed
+
+# Export detailed JSON report
+python analyze_all_projects.py --export analysis_report.json
+```
+
+**Features**:
+- **No Database Required**: Pure analysis without Neo4j loading
+- **Comprehensive Statistics**: Coverage, nodes, relationships, conversion issues
+- **Comparative Analysis**: Side-by-side comparison of all projects
+- **Export Capability**: Detailed JSON reports for further analysis
+
+## Performance Characteristics
+
+### Loading Performance (from real projects)
+
+| Project | Elements | Nodes | Relationships | Load Time |
+|---------|----------|-------|---------------|-----------|
+| Bulgul Rangers | 1,373 | 1,367 | 3,194 | 13.4s |
+| Miradi Marine | 317 | 310 | 613 | 2.4s |
+| Mardbalk HCP | 1,420 | 1,413 | 3,369 | 26.7s |
+| Wardaman Rangers | 896 | 889 | 2,107 | 26.2s |
+
+### Optimization Strategies
+
+**Database Optimizations**:
+- **Batch Loading**: 1000 items per batch for optimal throughput
+- **Constraints**: UUID uniqueness constraints for data integrity
+- **Indexes**: Automatic indexes on frequently queried properties
+- **Connection Pooling**: Managed by Neo4j driver for efficiency
+
+**Memory Management**:
+- **Streaming Processing**: Large files processed in chunks
+- **Garbage Collection**: Explicit cleanup of large data structures
+- **Batch Size Tuning**: Configurable batch sizes for different environments
+
+## Error Handling and Validation
+
+### Validation Warnings
+
+**Expected Conversion Issues**: 1,383 total across all 11 projects
+- **Cause**: Diagram links to unimplemented element types
+- **Impact**: Core conservation relationships work correctly
+- **Examples**: ThreatReductionResult, IntermediateResult, Objective elements
+
+**Handling Strategy**:
+- **Log and Continue**: Validation warnings don't stop processing
+- **Core Functionality**: Essential conservation relationships always work
+- **Future Enhancement**: Add parsers for missing element types
+
+### Error Recovery
+
+**File Processing Errors**:
+- **Format Validation**: Verify .xmpz2 structure before processing
+- **XML Validation**: Handle malformed XML gracefully
+- **Partial Success**: Continue processing even with some element failures
+
+**Database Errors**:
+- **Connection Retry**: Automatic retry logic for transient failures
+- **Transaction Rollback**: ACID compliance for data integrity
+- **Constraint Violations**: Clear error messages for duplicate data
+
+## Future Architecture Evolution
+
+### GraphRAG Integration (Phase 2)
+
+**Planned Components**:
+- **Graph Query Generator**: Convert natural language to Cypher queries
+- **Context Assembly**: Combine graph structure with textual content
+- **LLM Integration**: OpenAI/Anthropic APIs for conservation domain queries
+- **Response Generation**: Contextually aware conservation planning assistance
+
+**Architecture Extension**:
+```
+Current ETL Pipeline
+        ↓
+Neo4j Graph Database
+        ↓
+GraphRAG Engine ← LLM APIs
+        ↓
+Natural Language Interface
+        ↓
+Conservation Planning Assistant
+```
+
+### API and Web Interface (Phase 3)
+
+**FastAPI Backend**:
+- **RESTful Endpoints**: Project management and query APIs
+- **Authentication**: User management and project access control
+- **Real-time Updates**: WebSocket support for live project updates
+
+**Streamlit Frontend**:
+- **File Upload Interface**: Drag-and-drop project loading
+- **Graph Visualization**: Interactive conservation relationship displays
+- **Query Interface**: Natural language query with visual results
+- **Dashboard**: Conservation metrics and project insights
+
+This architecture provides a robust, scalable foundation for intelligent analysis of Miradi conservation projects, with clear separation of concerns and extensible design for future GraphRAG and web interface development.

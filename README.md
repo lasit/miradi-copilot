@@ -1,216 +1,351 @@
-# Miradi Copilot
+# Miradi Co-Pilot
 
-A Python-based application using FastAPI and Neo4j for graph-based data processing and API services.
+A GraphRAG-powered natural language interface for Miradi conservation projects using Neo4j, Python, and FastAPI.
 
-## Project Structure
+## 🌿 Overview
+
+Miradi Co-Pilot transforms Miradi conservation planning projects into an intelligent graph database, enabling natural language queries about conservation strategies, threats, targets, and their relationships. The system processes Miradi XML/JSON files into Neo4j and provides GraphRAG capabilities for conservation planning assistance.
+
+## ✨ Current Capabilities
+
+### ✅ **Fully Implemented**
+- **Miradi XML/JSON Parser**: Complete parsing of Miradi project files (.xmpz2) with robust handling of scattered XML structures
+- **Graph Data Model**: Conservation-specific graph schema with accurate relationship mapping
+- **Neo4j Integration**: Full ETL pipeline with batch loading, constraints, and dual field support
+- **Conservation Relationships**: THREATENS, MITIGATES, CONTRIBUTES_TO, ENHANCES, IMPLEMENTS connecting actual conservation elements
+- **Project Management**: Single-project mode with switching capabilities and proper metadata extraction
+- **Analysis Tools**: Comprehensive project analysis without database loading
+- **Data Integrity**: Zero null IDs, consistent field naming, and accurate conservation relationships
+
+### 📊 **System Statistics** (from 11 sample projects)
+- **8,488 total elements** parsed across all projects
+- **100% schema coverage** for known Miradi elements
+- **19,884 relationships** including conservation logic
+- **8,412 nodes** representing conservation concepts
+- **11 project types** successfully processed
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+1. **Neo4j Database** (version 4.4+)
+   ```bash
+   # Using Docker (recommended)
+   docker run -p 7474:7474 -p 7687:7687 -e NEO4J_AUTH=neo4j/password neo4j:latest
+   
+   # Or install locally from https://neo4j.com/download/
+   ```
+
+2. **Python 3.8+** with dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your Neo4j credentials
+   ```
+
+### Installation
+
+```bash
+git clone https://github.com/lasit/miradi-copilot
+cd miradi-copilot
+pip install -r requirements.txt
+cp .env.example .env
+# Configure .env with your Neo4j connection details
+```
+
+### Test Your Setup
+
+```bash
+# Test Neo4j connection
+python test_neo4j_connection.py
+
+# Test with sample data
+python load_project.py data/sample_projects/Bulgul_Rangers_v0.111.xmpz2 --clear
+```
+
+## 📖 Usage Guide
+
+### 1. **Load a Single Project**
+
+```bash
+# Load project (clears database first)
+python load_project.py data/sample_projects/Bulgul_Rangers_v0.111.xmpz2 --clear
+
+# Load without clearing (append mode)
+python load_project.py data/sample_projects/Miradi_Marine_Example_v0.48.xmpz2
+```
+
+**Example Output:**
+```
+🌿 MIRADI PROJECT LOADER
+📁 Project: Bulgul Rangers
+✅ SUCCESS!
+📊 LOADING STATISTICS
+📈 Elements Parsed: 1,373
+🎯 Schema Coverage: 100.0%
+🔗 Nodes Created: 1,367
+🔗 Relationships Created: 3,194
+⏱️  Total Time: 13.4s
+
+🔗 RELATIONSHIP BREAKDOWN:
+   • THREATENS: 95 (Threat → Target)
+   • MITIGATES: 83 (Strategy → Threat)
+   • CONTRIBUTES_TO: 86 (Strategy → Result)
+   • ENHANCES: 79 (Result → Target)
+   • IMPLEMENTS: 191 (Activity → Strategy)
+```
+
+### 2. **Manage Projects**
+
+```bash
+# Check current project status
+python switch_project.py
+
+# Switch to a different project
+python switch_project.py "Miradi Marine"
+
+# List available projects
+python switch_project.py --list
+```
+
+**Example Output:**
+```
+🌿 MIRADI PROJECT SWITCHER
+📊 CURRENT PROJECT STATUS
+📁 Project: Bulgul Rangers
+⏰ Loaded: 2025-07-05 18:48:04
+🔗 Nodes: 1,367
+🔗 Relationships: 3,194
+
+📂 AVAILABLE PROJECTS
+Found 11 available projects:
+ 1. Bulgul Rangers
+ 2. Caring For Country
+ 3. Miradi Marine Example
+ ...
+```
+
+### 3. **Analyze Projects (No Database Required)**
+
+```bash
+# Basic analysis of all projects
+python analyze_all_projects.py
+
+# Detailed analysis with error reporting
+python analyze_all_projects.py --detailed
+
+# Export detailed JSON report
+python analyze_all_projects.py --export analysis_report.json
+```
+
+**Example Output:**
+```
+🔍 MIRADI PROJECT ANALYZER
+✅ Successfully Analyzed: 11/11
+📈 AGGREGATE STATISTICS:
+   • Total Elements Parsed: 8,488
+   • Average Schema Coverage: 100.0%
+   • Total Potential Nodes: 8,412
+   • Total Potential Relationships: 19,884
+```
+
+### 4. **Query Conservation Data**
+
+Once loaded, query your conservation data with Cypher:
+
+```cypher
+// Find all threats to a specific target
+MATCH (threat:DIRECT_THREAT)-[:THREATENS]->(target:CONSERVATION_TARGET)
+WHERE target.name CONTAINS "Woodland"
+RETURN threat.name, target.name
+
+// Find strategies that mitigate threats
+MATCH (strategy:STRATEGY)-[:MITIGATES]->(threat:DIRECT_THREAT)
+RETURN strategy.name, threat.name
+
+// Find complete threat-strategy-result chains
+MATCH (threat:DIRECT_THREAT)<-[:MITIGATES]-(strategy:STRATEGY)-[:CONTRIBUTES_TO]->(result:RESULT)
+RETURN threat.name, strategy.name, result.name
+```
+
+## 🏗️ Architecture
+
+### System Components
+
+```
+Miradi XML/JSON Files (.xmpz2)
+           ↓
+    MiradiParser (src/etl/miradi_parser.py)
+           ↓
+    MiradiToGraphMapper (src/etl/schema_mapper.py)
+           ↓
+    Neo4jLoader (src/etl/neo4j_loader.py)
+           ↓
+    Neo4j Graph Database
+           ↓
+    GraphRAG Queries (Future)
+```
+
+### Key Classes
+
+- **`MiradiParser`**: Extracts conservation elements from Miradi XML/JSON
+- **`MiradiToGraphMapper`**: Converts parsed data to graph nodes and relationships
+- **`Neo4jLoader`**: Handles database operations, constraints, and batch loading
+- **`Neo4jConnection`**: Manages database connections and query execution
+
+### Data Flow
+
+1. **Parse**: Extract conservation elements from Miradi files
+2. **Map**: Convert to graph nodes (Targets, Threats, Strategies) and relationships
+3. **Load**: Batch insert into Neo4j with constraints and indexes
+4. **Query**: Use Cypher or GraphRAG for conservation analysis
+
+## 📁 Project Structure
 
 ```
 miradi-copilot/
-├── api/           # FastAPI application and routes
-├── etl/           # Extract, Transform, Load processes
-├── graph/         # Neo4j graph database operations
-├── tests/         # Unit and integration tests
-├── data/          # Data files and datasets
-├── docs/          # Documentation
-├── .vscode/       # VS Code configuration
-├── requirements.txt
-├── .gitignore
-└── README.md
+├── src/
+│   ├── etl/                    # ETL Pipeline
+│   │   ├── miradi_parser.py    # Miradi XML/JSON parser
+│   │   ├── schema_mapper.py    # Graph conversion logic
+│   │   └── neo4j_loader.py     # Database loading
+│   └── graph/
+│       ├── models.py           # Graph data models
+│       └── neo4j_connection.py # Database connection
+├── data/sample_projects/       # Sample Miradi projects
+├── docs/                       # Documentation
+├── tests/                      # Test suite
+├── load_project.py            # Single project loader
+├── switch_project.py          # Project management
+├── analyze_all_projects.py    # Analysis tool
+└── clear_neo4j.py            # Database utility
 ```
 
-## Requirements
+## 🔗 Conservation Relationships
 
-- Python 3.11+
-- Neo4j database
-- Virtual environment (recommended)
+The system models key conservation planning relationships:
 
-## Setup
+| Relationship | Source | Target | Description |
+|--------------|--------|--------|-------------|
+| `THREATENS` | Direct Threat | Conservation Target | Threat impacts target |
+| `MITIGATES` | Strategy | Direct Threat | Strategy reduces threat |
+| `CONTRIBUTES_TO` | Strategy | Result | Strategy produces result |
+| `ENHANCES` | Result | Conservation Target | Result improves target |
+| `IMPLEMENTS` | Activity | Strategy | Activity executes strategy |
 
-### Prerequisites
-- Python 3.11+
-- Docker and Docker Compose
-- Git
+## 📊 Sample Projects
 
-### 1. Start Neo4j Database
-Start the Neo4j database using Docker Compose:
-```bash
-docker-compose up -d neo4j
-```
+The system includes 11 real conservation projects:
 
-This will:
-- Start Neo4j 5.15 Community Edition
-- Expose Neo4j Browser on http://localhost:7474
-- Expose Bolt protocol on bolt://localhost:7687
-- Use credentials: `neo4j/password123`
-- Create persistent volumes for data storage
+1. **Bulgul Rangers** (1,373 elements) - Indigenous land management
+2. **Caring for Country** (759 elements) - Traditional ecological knowledge
+3. **Miradi Marine Example** (317 elements) - Marine conservation
+4. **Malak Malak Rangers** (1,069 elements) - Cultural landscape management
+5. **Mardbalk HCP** (1,420 elements) - Habitat conservation planning
+6. **Wardaman IPA Rangers** (896 elements) - Indigenous protected areas
+7. And 5 more diverse conservation projects...
 
-To stop Neo4j:
-```bash
-docker-compose down
-```
+## 🛠️ Development
 
-To view Neo4j logs:
-```bash
-docker-compose logs neo4j
-```
-
-### 2. Python Environment Setup
-
-**Create and activate virtual environment:**
-```bash
-python -m venv venv
-
-# On Windows
-venv\Scripts\activate
-
-# On macOS/Linux
-source venv/bin/activate
-```
-
-**Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Environment Configuration
-Copy the example environment file and customize as needed:
-```bash
-cp .env.example .env
-```
-
-The default configuration works with the Docker Neo4j setup:
-```
-NEO4J_URI=bolt://localhost:7687
-NEO4J_USER=neo4j
-NEO4J_PASSWORD=password123
-NEO4J_DATABASE=neo4j
-API_HOST=0.0.0.0
-API_PORT=8000
-```
-
-## Development
-
-### Quick Setup with Makefile
-The project includes a Makefile for common development tasks:
+### Running Tests
 
 ```bash
-# Complete development setup
-make dev-setup
+# Test Neo4j connection
+python test_neo4j_connection.py
 
-# Or step by step:
-make venv                # Create virtual environment
-make install-dev         # Install all dependencies + dev tools
-make docker-up           # Start Neo4j database
+# Test parser with sample data
+python test_parser_basic.py
+
+# Test schema mapping
+python test_schema_mapper.py
 ```
 
-### Available Make Commands
-```bash
-make help               # Show all available commands
-make venv               # Create virtual environment
-make install            # Install production dependencies
-make install-dev        # Install development dependencies
-make test               # Run tests
-make test-coverage      # Run tests with coverage report
-make format             # Format code with black and isort
-make lint               # Run linting (flake8, mypy, pylint)
-make clean              # Clean up cache files
-make run-api            # Start FastAPI development server
-make docker-up          # Start Neo4j with Docker
-make docker-down        # Stop Docker services
-make check              # Run format, lint, and test (pre-commit check)
-```
+### Adding New Element Types
 
-### Manual Commands
+1. Add parser method in `src/etl/miradi_parser.py`
+2. Add mapping logic in `src/etl/schema_mapper.py`
+3. Update graph models in `src/graph/models.py`
+4. Add tests in `tests/`
 
-**Running the API:**
-```bash
-make run-api
-# or manually:
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
-```
+### Performance Optimization
 
-**Running Tests:**
-```bash
-make test
-# or with coverage:
-make test-coverage
-# or manually:
-pytest tests/ -v
-```
+- **Batch Size**: Adjust `batch_size` in Neo4jLoader (default: 1000)
+- **Indexes**: Automatic indexes on `id`, `name`, `node_type` properties
+- **Constraints**: UUID uniqueness constraints for data integrity
+- **Connection Pooling**: Managed by Neo4j driver
 
-**Code Formatting:**
-```bash
-make format
-# or manually:
-black .
-isort .
-```
+## 🚧 Known Limitations
 
-**Linting:**
-```bash
-make lint
-# or manually:
-flake8 api etl graph tests
-mypy api etl graph
-pylint api etl graph
-```
+### Missing Element Types
+- `ThreatReductionResult` (causes 160 validation warnings)
+- `IntermediateResult` (referenced in diagrams)
+- `Objective` (linked in result chains)
 
-### Pre-commit Hooks
-The project uses pre-commit hooks to ensure code quality:
+### Validation Warnings
+- **Expected**: 1,383 conversion issues across all projects
+- **Cause**: Diagram links to unimplemented element types
+- **Impact**: Core conservation relationships work correctly
+- **Solution**: Add parsers for missing element types
 
-```bash
-# Install pre-commit hooks (included in make install-dev)
-pre-commit install
+## 🗺️ Roadmap
 
-# Run pre-commit on all files
-pre-commit run --all-files
-```
+### Phase 1: Core ETL ✅ (Completed)
+- [x] Miradi XML/JSON parsing
+- [x] Graph data model
+- [x] Neo4j integration
+- [x] Conservation relationships
+- [x] Project management tools
 
-Pre-commit will automatically run:
-- Code formatting (black, isort)
-- Linting (flake8, mypy)
-- Security checks (bandit)
-- Basic file checks (trailing whitespace, etc.)
+### Phase 2: GraphRAG Integration 🚧 (In Progress)
+- [ ] LLM integration (OpenAI/Anthropic)
+- [ ] Graph-aware query generation
+- [ ] Natural language interface
+- [ ] Conservation domain prompts
 
-## Technology Stack
+### Phase 3: Advanced Features 📋 (Planned)
+- [ ] FastAPI REST endpoints
+- [ ] Streamlit web interface
+- [ ] Multi-project analysis
+- [ ] Conservation metrics dashboard
+- [ ] Export capabilities (PDF reports)
 
-- **FastAPI**: Modern, fast web framework for building APIs
-- **Neo4j**: Graph database for complex relationship modeling
-- **Pydantic**: Data validation using Python type annotations
-- **Uvicorn**: ASGI server for FastAPI applications
-- **Pytest**: Testing framework
+### Phase 4: Production Features 📋 (Future)
+- [ ] User authentication
+- [ ] Project collaboration
+- [ ] Version control for projects
+- [ ] Advanced analytics
+- [ ] Integration with other conservation tools
 
-## Documentation
+## 🤝 Contributing
 
-Comprehensive documentation is available in the [`docs/`](docs/) directory:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### 📋 **Core Documentation**
-- **[Architecture Overview](docs/01-architecture-overview.md)**: System design and component architecture
-- **[Domain Model](docs/02-domain-model.md)**: Conservation concepts and Miradi terminology
-- **[Graph Schema](docs/04-graph-schema.md)**: Neo4j database design and query patterns
+## 📄 License
 
-### 🔧 **Development Guides**
-- **[Development Guide](docs/07-development-guide.md)**: Best practices for Cline-assisted development
-- **[Data Flow](docs/03-data-flow.md)**: ETL pipeline and data processing *(template)*
-- **[GraphRAG Architecture](docs/06-rag-architecture.md)**: AI query processing *(template)*
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### 🚀 **Operations**
-- **[Deployment Guide](docs/08-deployment.md)**: Production deployment procedures *(template)*
-- **[Schema Documentation](docs/schemas/)**: Miradi file format analysis
+## 🆘 Support
 
-### 📊 **Visual Resources**
-- **[Diagrams](docs/diagrams/)**: System diagrams and visualization standards
+- **Documentation**: See `docs/` directory
+- **Issues**: Report bugs via GitHub Issues
+- **Discussions**: Use GitHub Discussions for questions
+- **Email**: Contact the development team
 
-For a complete overview, see the [Documentation Index](docs/README.md).
+## 🙏 Acknowledgments
 
-## Contributing
+- **Miradi Software**: For the conservation planning framework
+- **Conservation Measures Partnership**: For conservation standards
+- **Neo4j**: For the graph database platform
+- **Sample Projects**: Provided by conservation organizations worldwide
 
-1. Follow PEP 8 style guidelines
-2. Write tests for new functionality
-3. Update documentation as needed
-4. Use type hints throughout the codebase
-5. Review the [Development Guide](docs/07-development-guide.md) for AI-assisted development best practices
+---
 
-## License
-
-[Add your license information here]
+**Ready to transform your conservation planning with AI? Start with `python load_project.py --help`!** 🌿
