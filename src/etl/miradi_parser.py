@@ -865,8 +865,18 @@ class MiradiParser(BaseParser):
                 chain_uuid = self._extract_element_uuid(chain_data, 'ResultsChainUUID')
                 chain_name = self._extract_element_name(chain_data, 'ResultsChainName')
                 
+                # Extract diagram factor IDs (critical for CONTAINS relationships)
+                diagram_factor_ids = self._extract_id_list(chain_data, 'ResultsChainDiagramFactorIds', 'DiagramFactorId')
+                diagram_link_ids = self._extract_id_list(chain_data, 'ResultsChainDiagramLinkIds', 'DiagramLinkId')
+                
+                # Extract additional fields
+                chain_details = self._extract_nested_text(chain_data, 'children', 'ResultsChainDetails', 'text')
+                chain_identifier = self._extract_nested_text(chain_data, 'children', 'ResultsChainIdentifier', 'text')
+                
                 # Debug logging
                 self.logger.debug(f"Extracted Results Chain - ID: {chain_id}, Name: {chain_name}, UUID: {chain_uuid}")
+                self.logger.debug(f"  Diagram Factor IDs: {diagram_factor_ids}")
+                self.logger.debug(f"  Diagram Link IDs: {diagram_link_ids}")
                 
                 chain = ParsedElement(
                     element_type="ResultsChain",
@@ -877,6 +887,16 @@ class MiradiParser(BaseParser):
                     raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
                     priority=ElementPriority.MUST_SUPPORT
                 )
+                
+                # Add extracted fields to data
+                if chain_details:
+                    chain.data['details'] = chain_details
+                if chain_identifier:
+                    chain.data['identifier'] = chain_identifier
+                if diagram_factor_ids:
+                    chain.data['diagram_factor_ids'] = diagram_factor_ids
+                if diagram_link_ids:
+                    chain.data['diagram_link_ids'] = diagram_link_ids
                 
                 results_chains.append(chain)
                 self._track_element_stats("ResultsChain")
@@ -1344,6 +1364,359 @@ class MiradiParser(BaseParser):
         self.logger.info(f"Extracted {len(results)} threat reduction results")
         return results
     
+    def extract_objectives(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract objectives from Objective elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed objective elements
+        """
+        self.logger.info("Extracting objectives")
+        objectives = []
+        
+        # Find ObjectivePool
+        objective_pool = None
+        for elem in root.iter():
+            if self._clean_element_name(elem.tag) == "ObjectivePool":
+                objective_pool = elem
+                break
+        
+        if objective_pool is None:
+            self.logger.warning("ObjectivePool not found")
+            return objectives
+        
+        # Extract individual objectives
+        for elem in objective_pool.iter():
+            if self._clean_element_name(elem.tag) == "Objective":
+                objective_data = self._extract_element_data(elem)
+                
+                # Extract key identifiers using helper methods
+                objective_id = self._extract_element_id(objective_data)
+                objective_uuid = self._extract_element_uuid(objective_data, 'ObjectiveUUID')
+                objective_name = self._extract_element_name(objective_data, 'ObjectiveName')
+                
+                # Extract additional fields
+                objective_identifier = self._extract_nested_text(objective_data, 'children', 'ObjectiveIdentifier', 'text')
+                evidence_confidence = self._extract_nested_text(objective_data, 'children', 'ObjectiveEvidenceConfidence', 'text')
+                evidence_notes = self._extract_nested_text(objective_data, 'children', 'ObjectiveEvidenceNotes', 'text')
+                
+                # Extract related IDs
+                relevant_activity_ids = self._extract_id_list(objective_data, 'ObjectiveRelevantActivityIds', 'ActivityId')
+                relevant_strategy_ids = self._extract_id_list(objective_data, 'ObjectiveRelevantStrategyIds', 'StrategyId')
+                relevant_indicator_ids = self._extract_id_list(objective_data, 'ObjectiveRelevantIndicatorIds', 'IndicatorId')
+                
+                # Debug logging
+                self.logger.debug(f"Extracted Objective - ID: {objective_id}, Name: {objective_name}, UUID: {objective_uuid}")
+                
+                objective = ParsedElement(
+                    element_type="Objective",
+                    element_id=objective_id,
+                    uuid=objective_uuid,
+                    name=objective_name,
+                    data=objective_data,
+                    raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
+                    priority=ElementPriority.SHOULD_SUPPORT
+                )
+                
+                # Add extracted fields to data
+                if objective_identifier:
+                    objective.data['identifier'] = objective_identifier
+                if evidence_confidence:
+                    objective.data['evidence_confidence'] = evidence_confidence
+                if evidence_notes:
+                    objective.data['evidence_notes'] = evidence_notes
+                if relevant_activity_ids:
+                    objective.data['relevant_activity_ids'] = relevant_activity_ids
+                if relevant_strategy_ids:
+                    objective.data['relevant_strategy_ids'] = relevant_strategy_ids
+                if relevant_indicator_ids:
+                    objective.data['relevant_indicator_ids'] = relevant_indicator_ids
+                
+                objectives.append(objective)
+                self._track_element_stats("Objective")
+        
+        self.logger.info(f"Extracted {len(objectives)} objectives")
+        return objectives
+    
+    def extract_goals(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract goals from Goal elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed goal elements
+        """
+        self.logger.info("Extracting goals")
+        goals = []
+        
+        # Find GoalPool
+        goal_pool = None
+        for elem in root.iter():
+            if self._clean_element_name(elem.tag) == "GoalPool":
+                goal_pool = elem
+                break
+        
+        if goal_pool is None:
+            self.logger.warning("GoalPool not found")
+            return goals
+        
+        # Extract individual goals
+        for elem in goal_pool.iter():
+            if self._clean_element_name(elem.tag) == "Goal":
+                goal_data = self._extract_element_data(elem)
+                
+                # Extract key identifiers using helper methods
+                goal_id = self._extract_element_id(goal_data)
+                goal_uuid = self._extract_element_uuid(goal_data, 'GoalUUID')
+                goal_name = self._extract_element_name(goal_data, 'GoalName')
+                
+                # Extract additional fields
+                goal_identifier = self._extract_nested_text(goal_data, 'children', 'GoalIdentifier', 'text')
+                goal_details = self._extract_nested_text(goal_data, 'children', 'GoalDetails', 'text')
+                
+                # Extract related IDs
+                relevant_indicator_ids = self._extract_id_list(goal_data, 'GoalRelevantIndicatorIds', 'IndicatorId')
+                relevant_strategy_ids = self._extract_id_list(goal_data, 'GoalRelevantStrategyIds', 'StrategyId')
+                
+                # Debug logging
+                self.logger.debug(f"Extracted Goal - ID: {goal_id}, Name: {goal_name}, UUID: {goal_uuid}")
+                
+                goal = ParsedElement(
+                    element_type="Goal",
+                    element_id=goal_id,
+                    uuid=goal_uuid,
+                    name=goal_name,
+                    data=goal_data,
+                    raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
+                    priority=ElementPriority.OPTIONAL
+                )
+                
+                # Add extracted fields to data
+                if goal_identifier:
+                    goal.data['identifier'] = goal_identifier
+                if goal_details:
+                    goal.data['details'] = goal_details
+                if relevant_indicator_ids:
+                    goal.data['relevant_indicator_ids'] = relevant_indicator_ids
+                if relevant_strategy_ids:
+                    goal.data['relevant_strategy_ids'] = relevant_strategy_ids
+                
+                goals.append(goal)
+                self._track_element_stats("Goal")
+        
+        self.logger.info(f"Extracted {len(goals)} goals")
+        return goals
+    
+    def extract_key_ecological_attributes(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract key ecological attributes from KeyEcologicalAttribute elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed key ecological attribute elements
+        """
+        self.logger.info("Extracting key ecological attributes")
+        attributes = []
+        
+        # Find KeyEcologicalAttributePool
+        attribute_pool = None
+        for elem in root.iter():
+            if self._clean_element_name(elem.tag) == "KeyEcologicalAttributePool":
+                attribute_pool = elem
+                break
+        
+        if attribute_pool is None:
+            self.logger.warning("KeyEcologicalAttributePool not found")
+            return attributes
+        
+        # Extract individual key ecological attributes
+        for elem in attribute_pool.iter():
+            if self._clean_element_name(elem.tag) == "KeyEcologicalAttribute":
+                attribute_data = self._extract_element_data(elem)
+                
+                # Extract key identifiers using helper methods
+                attribute_id = self._extract_element_id(attribute_data)
+                attribute_uuid = self._extract_element_uuid(attribute_data, 'KeyEcologicalAttributeUUID')
+                attribute_name = self._extract_element_name(attribute_data, 'KeyEcologicalAttributeName')
+                
+                # Extract additional fields
+                attribute_identifier = self._extract_nested_text(attribute_data, 'children', 'KeyEcologicalAttributeIdentifier', 'text')
+                attribute_details = self._extract_nested_text(attribute_data, 'children', 'KeyEcologicalAttributeDetails', 'text')
+                
+                # Extract related IDs
+                indicator_ids = self._extract_id_list(attribute_data, 'KeyEcologicalAttributeIndicatorIds', 'IndicatorId')
+                
+                # Debug logging
+                self.logger.debug(f"Extracted Key Ecological Attribute - ID: {attribute_id}, Name: {attribute_name}, UUID: {attribute_uuid}")
+                
+                attribute = ParsedElement(
+                    element_type="KeyEcologicalAttribute",
+                    element_id=attribute_id,
+                    uuid=attribute_uuid,
+                    name=attribute_name,
+                    data=attribute_data,
+                    raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
+                    priority=ElementPriority.OPTIONAL
+                )
+                
+                # Add extracted fields to data
+                if attribute_identifier:
+                    attribute.data['identifier'] = attribute_identifier
+                if attribute_details:
+                    attribute.data['details'] = attribute_details
+                if indicator_ids:
+                    attribute.data['indicator_ids'] = indicator_ids
+                
+                attributes.append(attribute)
+                self._track_element_stats("KeyEcologicalAttribute")
+        
+        self.logger.info(f"Extracted {len(attributes)} key ecological attributes")
+        return attributes
+    
+    def extract_contributing_factors(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract contributing factors from ContributingFactor elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed contributing factor elements
+        """
+        self.logger.info("Extracting contributing factors")
+        factors = []
+        
+        # Find ContributingFactorPool
+        factor_pool = None
+        for elem in root.iter():
+            if self._clean_element_name(elem.tag) == "ContributingFactorPool":
+                factor_pool = elem
+                break
+        
+        if factor_pool is None:
+            self.logger.warning("ContributingFactorPool not found")
+            return factors
+        
+        # Extract individual contributing factors
+        for elem in factor_pool.iter():
+            if self._clean_element_name(elem.tag) == "ContributingFactor":
+                factor_data = self._extract_element_data(elem)
+                
+                # Extract key identifiers using helper methods
+                factor_id = self._extract_element_id(factor_data)
+                factor_uuid = self._extract_element_uuid(factor_data, 'ContributingFactorUUID')
+                factor_name = self._extract_element_name(factor_data, 'ContributingFactorName')
+                
+                # Extract additional fields
+                factor_identifier = self._extract_nested_text(factor_data, 'children', 'ContributingFactorIdentifier', 'text')
+                factor_details = self._extract_nested_text(factor_data, 'children', 'ContributingFactorDetails', 'text')
+                
+                # Debug logging
+                self.logger.debug(f"Extracted Contributing Factor - ID: {factor_id}, Name: {factor_name}, UUID: {factor_uuid}")
+                
+                factor = ParsedElement(
+                    element_type="ContributingFactor",
+                    element_id=factor_id,
+                    uuid=factor_uuid,
+                    name=factor_name,
+                    data=factor_data,
+                    raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
+                    priority=ElementPriority.OPTIONAL
+                )
+                
+                # Add extracted fields to data
+                if factor_identifier:
+                    factor.data['identifier'] = factor_identifier
+                if factor_details:
+                    factor.data['details'] = factor_details
+                
+                factors.append(factor)
+                self._track_element_stats("ContributingFactor")
+        
+        self.logger.info(f"Extracted {len(factors)} contributing factors")
+        return factors
+    
+    def extract_intermediate_results(self, root: ET.Element) -> List[ParsedElement]:
+        """
+        Extract intermediate results from IntermediateResult elements.
+        
+        Args:
+            root: Root XML element
+            
+        Returns:
+            List of parsed intermediate result elements
+        """
+        self.logger.info("Extracting intermediate results")
+        results = []
+        
+        # Find IntermediateResultPool
+        result_pool = None
+        for elem in root.iter():
+            if self._clean_element_name(elem.tag) == "IntermediateResultPool":
+                result_pool = elem
+                break
+        
+        if result_pool is None:
+            self.logger.warning("IntermediateResultPool not found")
+            return results
+        
+        # Extract individual intermediate results
+        for elem in result_pool.iter():
+            if self._clean_element_name(elem.tag) == "IntermediateResult":
+                result_data = self._extract_element_data(elem)
+                
+                # Extract key identifiers using helper methods
+                result_id = self._extract_element_id(result_data)
+                result_uuid = self._extract_element_uuid(result_data, 'IntermediateResultUUID')
+                result_name = self._extract_element_name(result_data, 'IntermediateResultName')
+                
+                # Extract additional fields
+                result_details = self._extract_nested_text(result_data, 'children', 'IntermediateResultDetails', 'text')
+                result_identifier = self._extract_nested_text(result_data, 'children', 'IntermediateResultIdentifier', 'text')
+                evidence_notes = self._extract_nested_text(result_data, 'children', 'IntermediateResultEvidenceNotes', 'text')
+                
+                # Extract related IDs
+                indicator_ids = self._extract_id_list(result_data, 'IntermediateResultIndicatorIds', 'IndicatorId')
+                objective_ids = self._extract_id_list(result_data, 'IntermediateResultObjectiveIds', 'ObjectiveId')
+                
+                # Debug logging
+                self.logger.debug(f"Extracted Intermediate Result - ID: {result_id}, Name: {result_name}, UUID: {result_uuid}")
+                
+                result = ParsedElement(
+                    element_type="IntermediateResult",
+                    element_id=result_id,
+                    uuid=result_uuid,
+                    name=result_name,
+                    data=result_data,
+                    raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
+                    priority=ElementPriority.MUST_SUPPORT
+                )
+                
+                # Add extracted fields to data
+                if result_details:
+                    result.data['details'] = result_details
+                if result_identifier:
+                    result.data['identifier'] = result_identifier
+                if evidence_notes:
+                    result.data['evidence_notes'] = evidence_notes
+                if indicator_ids:
+                    result.data['indicator_ids'] = indicator_ids
+                if objective_ids:
+                    result.data['objective_ids'] = objective_ids
+                
+                results.append(result)
+                self._track_element_stats("IntermediateResult")
+        
+        self.logger.info(f"Extracted {len(results)} intermediate results")
+        return results
+    
     def extract_indicators(self, root: ET.Element) -> List[ParsedElement]:
         """
         Extract indicators from Indicator elements.
@@ -1506,7 +1879,12 @@ class MiradiParser(BaseParser):
                 'diagram_factors': self.extract_diagram_factors(root),
                 'diagram_links': self.extract_diagram_links(root),
                 'threat_reduction_results': self.extract_threat_reduction_results(root),
+                'intermediate_results': self.extract_intermediate_results(root),
                 'indicators': self.extract_indicators(root),
+                'objectives': self.extract_objectives(root),
+                'goals': self.extract_goals(root),
+                'key_ecological_attributes': self.extract_key_ecological_attributes(root),
+                'contributing_factors': self.extract_contributing_factors(root),
                 'parsing_stats': self.stats,
                 'file_info': {
                     'source_file': str(file_path),

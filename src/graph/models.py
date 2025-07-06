@@ -129,7 +129,13 @@ class NodeType(Enum):
     # Monitoring and Planning Elements
     INDICATOR = "INDICATOR"                      # Indicator elements
     OBJECTIVE = "OBJECTIVE"                      # Objective elements  
+    GOAL = "GOAL"                               # Goal elements (higher-level conservation aims)
     RESOURCE = "RESOURCE"                        # Resource elements (people/organizations)
+    
+    # Conservation Results Elements
+    THREAT_REDUCTION_RESULT = "THREAT_REDUCTION_RESULT"  # ThreatReductionResult elements
+    KEY_ECOLOGICAL_ATTRIBUTE = "KEY_ECOLOGICAL_ATTRIBUTE"  # KeyEcologicalAttribute elements
+    CONTRIBUTING_FACTOR = "CONTRIBUTING_FACTOR"  # ContributingFactor elements (indirect threats)
     
     # Visual Representation Elements
     CONCEPTUAL_MODEL = "CONCEPTUAL_MODEL"        # ConceptualModel elements

@@ -129,6 +129,40 @@ class MiradiToGraphMapper:
                     create_belongs_to_project_relationship(node.id, project_id)
                 )
             
+            goals = self._create_goal_nodes(parsed_data.get('goals', []))
+            for node in goals:
+                result.add_node(node)
+                result.add_relationship(
+                    create_belongs_to_project_relationship(node.id, project_id)
+                )
+            
+            key_ecological_attributes = self._create_key_ecological_attribute_nodes(
+                parsed_data.get('key_ecological_attributes', [])
+            )
+            for node in key_ecological_attributes:
+                result.add_node(node)
+                result.add_relationship(
+                    create_belongs_to_project_relationship(node.id, project_id)
+                )
+            
+            contributing_factors = self._create_contributing_factor_nodes(
+                parsed_data.get('contributing_factors', [])
+            )
+            for node in contributing_factors:
+                result.add_node(node)
+                result.add_relationship(
+                    create_belongs_to_project_relationship(node.id, project_id)
+                )
+            
+            threat_reduction_results = self._create_threat_reduction_result_nodes(
+                parsed_data.get('threat_reduction_results', [])
+            )
+            for node in threat_reduction_results:
+                result.add_node(node)
+                result.add_relationship(
+                    create_belongs_to_project_relationship(node.id, project_id)
+                )
+            
             resources = self._create_resource_nodes(parsed_data.get('resources', []))
             for node in resources:
                 result.add_node(node)
@@ -590,6 +624,151 @@ class MiradiToGraphMapper:
             nodes.append(node)
         
         logger.debug(f"Created {len(nodes)} objective nodes")
+        return nodes
+    
+    def _create_goal_nodes(self, goals: List[Any]) -> List[MiradiNode]:
+        """Create goal nodes."""
+        logger.debug(f"Creating {len(goals)} goal nodes")
+        
+        nodes = []
+        for goal in goals:
+            # Extract data from element (handles both ParsedElement and dict)
+            goal_data = self._extract_element_data(goal)
+            
+            goal_id = goal_data.get('id')
+            goal_name = goal_data.get('name', f'Goal {goal_id}')
+            goal_uuid = goal_data.get('uuid')
+            
+            if not goal_id:
+                logger.warning("Skipping goal without ID")
+                continue
+            
+            properties = {
+                'identifier': goal_data.get('identifier', ''),
+                'details': goal_data.get('details', ''),
+                'relevant_indicator_ids': str(goal_data.get('relevant_indicator_ids', [])),
+                'relevant_strategy_ids': str(goal_data.get('relevant_strategy_ids', []))
+            }
+            
+            node = MiradiNode(
+                id=goal_id,
+                node_type=NodeType.GOAL,
+                name=goal_name,
+                uuid=goal_uuid,
+                properties=properties,
+                source_element="Goal"
+            )
+            nodes.append(node)
+        
+        logger.debug(f"Created {len(nodes)} goal nodes")
+        return nodes
+    
+    def _create_key_ecological_attribute_nodes(self, attributes: List[Any]) -> List[MiradiNode]:
+        """Create key ecological attribute nodes."""
+        logger.debug(f"Creating {len(attributes)} key ecological attribute nodes")
+        
+        nodes = []
+        for attribute in attributes:
+            # Extract data from element (handles both ParsedElement and dict)
+            attribute_data = self._extract_element_data(attribute)
+            
+            attribute_id = attribute_data.get('id')
+            attribute_name = attribute_data.get('name', f'Key Ecological Attribute {attribute_id}')
+            attribute_uuid = attribute_data.get('uuid')
+            
+            if not attribute_id:
+                logger.warning("Skipping key ecological attribute without ID")
+                continue
+            
+            properties = {
+                'identifier': attribute_data.get('identifier', ''),
+                'details': attribute_data.get('details', ''),
+                'indicator_ids': str(attribute_data.get('indicator_ids', []))
+            }
+            
+            node = MiradiNode(
+                id=attribute_id,
+                node_type=NodeType.KEY_ECOLOGICAL_ATTRIBUTE,
+                name=attribute_name,
+                uuid=attribute_uuid,
+                properties=properties,
+                source_element="KeyEcologicalAttribute"
+            )
+            nodes.append(node)
+        
+        logger.debug(f"Created {len(nodes)} key ecological attribute nodes")
+        return nodes
+    
+    def _create_contributing_factor_nodes(self, factors: List[Any]) -> List[MiradiNode]:
+        """Create contributing factor nodes."""
+        logger.debug(f"Creating {len(factors)} contributing factor nodes")
+        
+        nodes = []
+        for factor in factors:
+            # Extract data from element (handles both ParsedElement and dict)
+            factor_data = self._extract_element_data(factor)
+            
+            factor_id = factor_data.get('id')
+            factor_name = factor_data.get('name', f'Contributing Factor {factor_id}')
+            factor_uuid = factor_data.get('uuid')
+            
+            if not factor_id:
+                logger.warning("Skipping contributing factor without ID")
+                continue
+            
+            properties = {
+                'identifier': factor_data.get('identifier', ''),
+                'details': factor_data.get('details', '')
+            }
+            
+            node = MiradiNode(
+                id=factor_id,
+                node_type=NodeType.CONTRIBUTING_FACTOR,
+                name=factor_name,
+                uuid=factor_uuid,
+                properties=properties,
+                source_element="ContributingFactor"
+            )
+            nodes.append(node)
+        
+        logger.debug(f"Created {len(nodes)} contributing factor nodes")
+        return nodes
+    
+    def _create_threat_reduction_result_nodes(self, results: List[Any]) -> List[MiradiNode]:
+        """Create threat reduction result nodes."""
+        logger.debug(f"Creating {len(results)} threat reduction result nodes")
+        
+        nodes = []
+        for result in results:
+            # Extract data from element (handles both ParsedElement and dict)
+            result_data = self._extract_element_data(result)
+            
+            result_id = result_data.get('id')
+            result_name = result_data.get('name', f'Threat Reduction Result {result_id}')
+            result_uuid = result_data.get('uuid')
+            
+            if not result_id:
+                logger.warning("Skipping threat reduction result without ID")
+                continue
+            
+            properties = {
+                'identifier': result_data.get('identifier', ''),
+                'details': result_data.get('details', ''),
+                'indicator_ids': str(result_data.get('indicator_ids', [])),
+                'objective_ids': str(result_data.get('objective_ids', []))
+            }
+            
+            node = MiradiNode(
+                id=result_id,
+                node_type=NodeType.THREAT_REDUCTION_RESULT,
+                name=result_name,
+                uuid=result_uuid,
+                properties=properties,
+                source_element="ThreatReductionResult"
+            )
+            nodes.append(node)
+        
+        logger.debug(f"Created {len(nodes)} threat reduction result nodes")
         return nodes
     
     def _create_resource_nodes(self, resources: List[Any]) -> List[MiradiNode]:
