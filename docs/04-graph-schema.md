@@ -328,6 +328,30 @@ Connects activities to their parent strategies.
 - **Cardinality**: Many-to-One
 - **Example**: `(ranger_training:Activity)-[:PART_OF]->(anti_poaching:Strategy)`
 
+### HAS_ATTRIBUTE
+Connects conservation targets to their key ecological attributes.
+
+- **Type**: `HAS_ATTRIBUTE`
+- **Source**: `ConservationTarget`
+- **Target**: `KeyEcologicalAttribute`
+- **Properties**:
+  - `attribute_type` (String): Type of attribute (key_ecological_attribute)
+  - `source_element` (String): Source element type for relationship
+- **Cardinality**: Many-to-Many
+- **Example**: `(forest:ConservationTarget)-[:HAS_ATTRIBUTE]->(canopy_cover:KeyEcologicalAttribute)`
+
+### EXPERIENCES
+Connects conservation targets to stresses they experience.
+
+- **Type**: `EXPERIENCES`
+- **Source**: `ConservationTarget`
+- **Target**: `Stress`
+- **Properties**:
+  - `stress_type` (String): Type of stress (target_stress)
+  - `source_element` (String): Source element type for relationship
+- **Cardinality**: Many-to-Many
+- **Example**: `(forest:ConservationTarget)-[:EXPERIENCES]->(habitat_fragmentation:Stress)`
+
 ### BELONGS_TO
 Connects all project elements to their parent project.
 

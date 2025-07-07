@@ -1448,6 +1448,137 @@ class MiradiToGraphMapper:
                     )
                     relationships.append(rel)
         
+        # NEW: Create relationships from Conservation Targets (Phase 2 Implementation)
+        logger.debug("Creating relationships from Conservation Targets")
+        conservation_targets = parsed_data.get('conservation_targets', [])
+        for target in conservation_targets:
+            # Extract data from element (handles both ParsedElement and dict)
+            target_data = self._extract_element_data(target)
+            
+            target_id = target_data.get('id')
+            
+            # Step 1: BiodiversityTargetGoalIds → Goal DEFINES Target
+            goal_ids = target_data.get('goal_ids', [])
+            for goal_id in goal_ids:
+                if goal_id and target_id:
+                    rel = MiradiRelationship(
+                        source_id=goal_id,
+                        target_id=target_id,
+                        relationship_type=RelationshipType.DEFINES,
+                        properties={'definition_type': 'goal_target'},
+                        source_element="BiodiversityTargetGoalIds"
+                    )
+                    relationships.append(rel)
+            
+            # Step 2: BiodiversityTargetKeyEcologicalAttributeIds → Target HAS_ATTRIBUTE KEA
+            kea_ids = target_data.get('kea_ids', [])
+            for kea_id in kea_ids:
+                if kea_id and target_id:
+                    rel = MiradiRelationship(
+                        source_id=target_id,
+                        target_id=kea_id,
+                        relationship_type=RelationshipType.HAS_ATTRIBUTE,
+                        properties={'attribute_type': 'key_ecological_attribute'},
+                        source_element="BiodiversityTargetKeyEcologicalAttributeIds"
+                    )
+                    relationships.append(rel)
+            
+            # Step 3: BiodiversityTargetIndicatorIds → Target MEASURED_BY Indicator
+            indicator_ids = target_data.get('indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and target_id:
+                    rel = MiradiRelationship(
+                        source_id=indicator_id,
+                        target_id=target_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'target'},
+                        source_element="BiodiversityTargetIndicatorIds"
+                    )
+                    relationships.append(rel)
+            
+            # Step 4: BiodiversityTargetStressIds → Target EXPERIENCES Stress
+            stress_ids = target_data.get('stress_ids', [])
+            for stress_id in stress_ids:
+                if stress_id and target_id:
+                    rel = MiradiRelationship(
+                        source_id=target_id,
+                        target_id=stress_id,
+                        relationship_type=RelationshipType.EXPERIENCES,
+                        properties={'stress_type': 'target_stress'},
+                        source_element="BiodiversityTargetStressIds"
+                    )
+                    relationships.append(rel)
+        
+        # NEW: Create relationships from Strategies (Phase 3 Implementation)
+        logger.debug("Creating relationships from Strategies")
+        strategies = parsed_data.get('strategies', [])
+        for strategy in strategies:
+            # Extract data from element (handles both ParsedElement and dict)
+            strategy_data = self._extract_element_data(strategy)
+            
+            strategy_id = strategy_data.get('id')
+            
+            # Step 1: StrategyIndicatorIds → Strategy MEASURES Indicator
+            indicator_ids = strategy_data.get('indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and strategy_id:
+                    rel = MiradiRelationship(
+                        source_id=strategy_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'strategy'},
+                        source_element="StrategyIndicatorIds"
+                    )
+                    relationships.append(rel)
+            
+            # Step 2: StrategyObjectiveIds → Strategy DEFINES Objective
+            objective_ids = strategy_data.get('objective_ids', [])
+            for objective_id in objective_ids:
+                if objective_id and strategy_id:
+                    rel = MiradiRelationship(
+                        source_id=strategy_id,
+                        target_id=objective_id,
+                        relationship_type=RelationshipType.DEFINES,
+                        properties={'definition_type': 'strategy_objective'},
+                        source_element="StrategyObjectiveIds"
+                    )
+                    relationships.append(rel)
+        
+        # NEW: Create relationships from Threats (Phase 3 Implementation)
+        logger.debug("Creating relationships from Threats")
+        threats = parsed_data.get('threats', [])
+        for threat in threats:
+            # Extract data from element (handles both ParsedElement and dict)
+            threat_data = self._extract_element_data(threat)
+            
+            threat_id = threat_data.get('id')
+            
+            # Step 3: CauseIndicatorIds → Threat MEASURES Indicator
+            indicator_ids = threat_data.get('indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and threat_id:
+                    rel = MiradiRelationship(
+                        source_id=threat_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'threat'},
+                        source_element="CauseIndicatorIds"
+                    )
+                    relationships.append(rel)
+            
+            # Step 4: CauseObjectiveIds → Threat DEFINES Objective
+            objective_ids = threat_data.get('objective_ids', [])
+            for objective_id in objective_ids:
+                if objective_id and threat_id:
+                    rel = MiradiRelationship(
+                        source_id=threat_id,
+                        target_id=objective_id,
+                        relationship_type=RelationshipType.DEFINES,
+                        properties={'definition_type': 'threat_objective'},
+                        source_element="CauseObjectiveIds"
+                    )
+                    relationships.append(rel)
+        
         # Create CONTAINS relationships (Model/Chain -> DiagramFactor)
         conceptual_models = parsed_data.get('conceptual_models', [])
         for model in conceptual_models:

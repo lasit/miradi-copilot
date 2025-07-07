@@ -136,6 +136,7 @@ class NodeType(Enum):
     THREAT_REDUCTION_RESULT = "THREAT_REDUCTION_RESULT"  # ThreatReductionResult elements
     KEY_ECOLOGICAL_ATTRIBUTE = "KEY_ECOLOGICAL_ATTRIBUTE"  # KeyEcologicalAttribute elements
     CONTRIBUTING_FACTOR = "CONTRIBUTING_FACTOR"  # ContributingFactor elements (indirect threats)
+    STRESS = "STRESS"                           # Stress elements (target stressors)
     
     # Visual Representation Elements
     CONCEPTUAL_MODEL = "CONCEPTUAL_MODEL"        # ConceptualModel elements
@@ -158,7 +159,9 @@ class RelationshipType(Enum):
     ENHANCES = "ENHANCES"                       # Strategy -> ConservationTarget (direct benefit)
     MEASURES = "MEASURES"                       # Indicator -> Target/Result/Strategy
     IMPLEMENTS = "IMPLEMENTS"                   # Activity -> Strategy (from StrategyOrderedActivityIds)
-    DEFINES = "DEFINES"                         # Objective -> Target/Threat/Strategy
+    DEFINES = "DEFINES"                         # Goal -> Target, Objective -> Target/Threat/Strategy
+    HAS_ATTRIBUTE = "HAS_ATTRIBUTE"             # Target -> KeyEcologicalAttribute
+    EXPERIENCES = "EXPERIENCES"                 # Target -> Stress
     
     # Structural Relationships
     BELONGS_TO_PROJECT = "BELONGS_TO_PROJECT"   # All elements -> Project

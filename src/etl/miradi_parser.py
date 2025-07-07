@@ -706,8 +706,15 @@ class MiradiParser(BaseParser):
                 target_uuid = self._extract_element_uuid(target_data, 'BiodiversityTargetUUID')
                 target_name = self._extract_element_name(target_data, 'BiodiversityTargetName')
                 
+                # Extract target relationship IDs
+                goal_ids = self._extract_id_list(target_data, 'BiodiversityTargetGoalIds', 'GoalId')
+                kea_ids = self._extract_id_list(target_data, 'BiodiversityTargetKeyEcologicalAttributeIds', 'KeyEcologicalAttributeId')
+                indicator_ids = self._extract_id_list(target_data, 'BiodiversityTargetIndicatorIds', 'IndicatorId')
+                stress_ids = self._extract_id_list(target_data, 'BiodiversityTargetStressIds', 'StressId')
+                
                 # Debug logging
                 self.logger.debug(f"Extracted Target - ID: {target_id}, Name: {target_name}, UUID: {target_uuid}")
+                self.logger.debug(f"  Goal IDs: {goal_ids}, KEA IDs: {kea_ids}, Indicator IDs: {indicator_ids}, Stress IDs: {stress_ids}")
                 
                 target = ParsedElement(
                     element_type="BiodiversityTarget",
@@ -718,6 +725,16 @@ class MiradiParser(BaseParser):
                     raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
                     priority=ElementPriority.MUST_SUPPORT
                 )
+                
+                # Add extracted relationship IDs to target data for schema mapper
+                if goal_ids:
+                    target.data['goal_ids'] = goal_ids
+                if kea_ids:
+                    target.data['kea_ids'] = kea_ids
+                if indicator_ids:
+                    target.data['indicator_ids'] = indicator_ids
+                if stress_ids:
+                    target.data['stress_ids'] = stress_ids
                 
                 targets.append(target)
                 self._track_element_stats("BiodiversityTarget")
@@ -759,8 +776,13 @@ class MiradiParser(BaseParser):
                 threat_uuid = self._extract_element_uuid(threat_data, 'CauseUUID')
                 threat_name = self._extract_element_name(threat_data, 'CauseName')
                 
+                # Extract threat relationship IDs (Phase 3)
+                indicator_ids = self._extract_id_list(threat_data, 'CauseIndicatorIds', 'IndicatorId')
+                objective_ids = self._extract_id_list(threat_data, 'CauseObjectiveIds', 'ObjectiveId')
+                
                 # Debug logging
                 self.logger.debug(f"Extracted Threat - ID: {threat_id}, Name: {threat_name}, UUID: {threat_uuid}")
+                self.logger.debug(f"  Indicator IDs: {indicator_ids}, Objective IDs: {objective_ids}")
                 
                 threat = ParsedElement(
                     element_type="Cause",
@@ -771,6 +793,12 @@ class MiradiParser(BaseParser):
                     raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
                     priority=ElementPriority.OPTIONAL  # Causes are 73% coverage
                 )
+                
+                # Add extracted relationship IDs to threat data for schema mapper (Phase 3)
+                if indicator_ids:
+                    threat.data['indicator_ids'] = indicator_ids
+                if objective_ids:
+                    threat.data['objective_ids'] = objective_ids
                 
                 threats.append(threat)
                 self._track_element_stats("Cause")
@@ -812,8 +840,13 @@ class MiradiParser(BaseParser):
                 strategy_uuid = self._extract_element_uuid(strategy_data, 'StrategyUUID')
                 strategy_name = self._extract_element_name(strategy_data, 'StrategyName')
                 
+                # Extract strategy relationship IDs (Phase 3)
+                indicator_ids = self._extract_id_list(strategy_data, 'StrategyIndicatorIds', 'IndicatorId')
+                objective_ids = self._extract_id_list(strategy_data, 'StrategyObjectiveIds', 'ObjectiveId')
+                
                 # Debug logging
                 self.logger.debug(f"Extracted Strategy - ID: {strategy_id}, Name: {strategy_name}, UUID: {strategy_uuid}")
+                self.logger.debug(f"  Indicator IDs: {indicator_ids}, Objective IDs: {objective_ids}")
                 
                 strategy = ParsedElement(
                     element_type="Strategy",
@@ -824,6 +857,12 @@ class MiradiParser(BaseParser):
                     raw_xml=ET.tostring(elem, encoding='unicode') if elem is not None else None,
                     priority=ElementPriority.MUST_SUPPORT
                 )
+                
+                # Add extracted relationship IDs to strategy data for schema mapper (Phase 3)
+                if indicator_ids:
+                    strategy.data['indicator_ids'] = indicator_ids
+                if objective_ids:
+                    strategy.data['objective_ids'] = objective_ids
                 
                 strategies.append(strategy)
                 self._track_element_stats("Strategy")
