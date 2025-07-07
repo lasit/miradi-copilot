@@ -153,9 +153,40 @@ python analyze_all_projects.py --export analysis_report.json
    • Total Potential Relationships: 19,884
 ```
 
-### 4. **Query Conservation Data**
+### 4. **Natural Language Queries (GraphRAG)**
 
-Once loaded, query your conservation data with Cypher:
+Test the natural language interface for conservation planning:
+
+```bash
+# Test the GraphRAG system
+python test_graphrag_system.py
+```
+
+**Example Natural Language Queries:**
+```python
+from src.graphrag.example_usage import MiradiGraphRAG
+
+# Initialize the GraphRAG system
+graphrag = MiradiGraphRAG()
+
+# Ask conservation questions in natural language
+result = graphrag.process_query("What threatens the coastal ecosystems?")
+result = graphrag.process_query("Which strategies are most effective?")
+result = graphrag.process_query("How does fire management help wildlife?")
+result = graphrag.process_query("What indicators track water quality?")
+```
+
+**Query Categories Supported:**
+- 🎯 **Threat Analysis**: "What threatens the coastal ecosystems?"
+- 📊 **Strategy Evaluation**: "Which strategies are most effective?"
+- 🔄 **Theory of Change**: "How does fire management help wildlife?"
+- 📈 **Monitoring**: "What indicators track water quality?"
+- 🗺️ **Spatial Analysis**: "Show me threats near forest areas"
+- 🎯 **Target Analysis**: "What is the viability status of our targets?"
+
+### 5. **Direct Cypher Queries**
+
+For advanced users, query conservation data directly with Cypher:
 
 ```cypher
 // Find all threats to a specific target
@@ -300,11 +331,12 @@ python test_schema_mapper.py
 - [x] Conservation relationships
 - [x] Project management tools
 
-### Phase 2: GraphRAG Integration 🚧 (In Progress)
-- [ ] LLM integration (OpenAI/Anthropic)
-- [ ] Graph-aware query generation
-- [ ] Natural language interface
-- [ ] Conservation domain prompts
+### Phase 2: GraphRAG Integration ✅ (Completed)
+- [x] Natural language query classification (6 conservation categories)
+- [x] Graph pattern matching (25+ specialized Cypher templates)
+- [x] Conservation domain prompts and expertise
+- [x] Context assembly for LLM consumption
+- [x] Complete GraphRAG foundation ready for LLM integration
 
 ### Phase 3: Advanced Features 📋 (Planned)
 - [ ] FastAPI REST endpoints

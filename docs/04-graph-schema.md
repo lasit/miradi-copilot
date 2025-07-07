@@ -602,4 +602,112 @@ ORDER BY p.name
 - **Archival Strategy**: Plan for historical data management
 - **Monitoring**: Track query performance and database growth
 
+## GraphRAG Integration
+
+### Natural Language Query Categories
+
+The graph schema supports natural language queries through specialized GraphRAG patterns organized into six conservation categories:
+
+#### 1. Threat Analysis Queries
+**Pattern**: `threat_analysis`
+```cypher
+MATCH (t:DirectThreat)-[r:THREATENS]->(target:ConservationTarget)
+OPTIONAL MATCH (t)<-[:MITIGATES]-(s:Strategy)
+RETURN t, target, s, r
+```
+
+**Example Queries**:
+- "What threatens the coastal ecosystems?"
+- "Which threats have the highest impact on marine habitats?"
+- "Show me all threats to forest biodiversity"
+
+#### 2. Strategy Evaluation Queries
+**Pattern**: `strategy_effectiveness`
+```cypher
+MATCH (s:Strategy)
+OPTIONAL MATCH (s)-[:IMPLEMENTS]-(a:Activity)
+OPTIONAL MATCH (s)-[:MITIGATES]->(t:DirectThreat)
+OPTIONAL MATCH (s)-[:CONTRIBUTES_TO]->(r)
+RETURN s, count(a) as activities, count(t) as threats_mitigated
+```
+
+**Example Queries**:
+- "Which strategies are most effective against poaching?"
+- "How well do our conservation strategies work?"
+- "What activities implement the habitat restoration strategy?"
+
+#### 3. Theory of Change Queries
+**Pattern**: `results_chain_analysis`
+```cypher
+MATCH path = (a:Activity)-[:PART_OF]->(s:Strategy)-[:CONTRIBUTES_TO]->(r)-[:ENHANCES]->(t:ConservationTarget)
+RETURN path, length(path) as chain_length
+```
+
+**Example Queries**:
+- "How does fire management help wildlife?"
+- "What is the impact pathway from education to conservation?"
+- "Trace the logic from anti-poaching to elephant populations"
+
+#### 4. Monitoring Queries
+**Pattern**: `monitoring_framework`
+```cypher
+MATCH (i:Indicator)-[:MEASURES]->(element)
+OPTIONAL MATCH (element)-[:BELONGS_TO]->(p:Project)
+RETURN i, element, p
+```
+
+**Example Queries**:
+- "What indicators track water quality?"
+- "Which targets lack monitoring indicators?"
+- "Show me all measurements for forest health"
+
+#### 5. Spatial Analysis Queries
+**Pattern**: `spatial_relationships`
+```cypher
+MATCH (element)-[:BELONGS_TO]->(p:Project)
+WHERE element.coordinates IS NOT NULL
+RETURN element, element.coordinates
+```
+
+**Example Queries**:
+- "Show me threats near the forest areas"
+- "What conservation targets are in the northern region?"
+- "Which strategies operate within 10km of the coast?"
+
+#### 6. Target Analysis Queries
+**Pattern**: `target_viability`
+```cypher
+MATCH (t:ConservationTarget)
+OPTIONAL MATCH (t)<-[:THREATENS]-(threat:DirectThreat)
+OPTIONAL MATCH (t)<-[:ENHANCES]-(s:Strategy)
+RETURN t, count(threat) as threat_count, count(s) as strategy_count
+```
+
+**Example Queries**:
+- "What is the viability status of our targets?"
+- "Which targets are most threatened?"
+- "Show me the health of marine ecosystems"
+
+### GraphRAG Query Processing Pipeline
+
+1. **Intent Classification**: Natural language query → Conservation category
+2. **Entity Extraction**: Identify targets, threats, strategies, etc.
+3. **Pattern Matching**: Map to appropriate Cypher template
+4. **Context Retrieval**: Execute optimized graph queries
+5. **Context Assembly**: Format results for LLM consumption
+
+### Performance Optimizations for GraphRAG
+
+**Query Pattern Optimizations**:
+- Pre-compiled Cypher templates for each category
+- Parameterized queries for efficient execution
+- Result limiting and pagination support
+- Spatial indexing for location-based queries
+
+**Context Assembly Optimizations**:
+- Token-aware result formatting (600+ tokens typical)
+- Hierarchical data structuring for LLM comprehension
+- Conservation domain terminology preservation
+- Relationship context preservation
+
 This schema provides a robust foundation for storing and querying Miradi conservation project data while supporting the complex analytical needs of the GraphRAG system.
