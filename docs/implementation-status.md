@@ -21,13 +21,13 @@ The foundational ETL (Extract, Transform, Load) pipeline is fully implemented an
 **Status**: **100% Complete with Full Conservation Coverage** ✅
 - **Miradi Parser**: **Complete implementation** with **10 element types**, **100% spatial data extraction**, and **complete theory of change** support
 - **Spatial Data Extraction**: **100% success rate** - all diagram factors have actual coordinates and dimensions extracted from Miradi XML
-- **Complete Conservation Framework**: **1,741 elements parsed**, **1,734 nodes created**, **4,202 relationships** including full theory of change pathways
+- **Complete Conservation Framework**: **1,772 elements parsed**, **5,631 relationships** including **complete theory of change pathways** and **enhanced ID list relationships**
 - **Enhanced Element Support**: **All conservation element types** including Goals, Key Ecological Attributes, Contributing Factors, Intermediate Results, Threat Reduction Results
-- **Graph Mapper**: **Complete conservation relationship logic** with 6 relationship types covering all conservation planning aspects
+- **Graph Mapper**: **Complete conservation relationship logic** with **11 relationship types** covering all conservation planning aspects **including IR→IR relationships**
 - **Neo4j Loader**: **Production-ready** with batch operations, constraints, and complete conservation logic storage
 - **Clean Visualization**: **Diagram factor architecture** with clean conservation-focused visualization capabilities
 - **Analysis Tools**: **Comprehensive analysis suite** with enhanced Cypher queries for complete conservation planning analysis
-- **Performance Achievement**: **1,741 elements parsed** (vs 1,567 previously), **4,202 relationships** (vs 3,583 previously)
+- **Performance Achievement**: **1,772 elements parsed**, **5,631 relationships** (+1,382 new relationships from enhanced parsing)
 
 ### 🚧 **Phase 2: GraphRAG Integration (IN PROGRESS)**
 
@@ -133,16 +133,38 @@ FastAPI backend and Streamlit frontend for web-based access.
 - **Dual Field Support**: Both `id` and `element_id` properties for query compatibility
 - **Conservation Relationship Accuracy**: Relationships connect actual conservation elements, not diagram representations
 
-**Conservation Relationships Implemented**:
+**Conservation Relationships Implemented (ENHANCED)**:
 ```python
 ✅ THREATENS        # Direct threat → Conservation target
 ✅ MITIGATES        # Strategy → Direct threat
-✅ CONTRIBUTES_TO   # Strategy → Result
+✅ CONTRIBUTES_TO   # Strategy → Result, IR → IR, IR → TRR, TRR → TRR (ENHANCED)
 ✅ ENHANCES         # Result → Conservation target
 ✅ IMPLEMENTS       # Activity → Strategy
+✅ MEASURES         # Indicator → Activity/Strategy, IR → Indicator, etc. (ENHANCED)
+✅ DEFINES          # Objective → Activity/Strategy, Goal → Strategy, etc. (ENHANCED)
 ✅ BELONGS_TO_PROJECT # Element → Project
 ✅ PART_OF          # Element → Parent element
 ✅ LINKS            # General diagram connections
+✅ CONTAINS         # Model/Chain → DiagramFactor
+```
+
+**Enhanced ID List Relationship Parsing (NEW)**:
+```python
+✅ ObjectiveRelevantIndicatorIds → MEASURES (Objective → Indicator)
+✅ IntermediateResultIndicatorIds → MEASURES (IntermediateResult → Indicator)  
+✅ IntermediateResultObjectiveIds → DEFINES (IntermediateResult → Objective)
+✅ ThreatReductionResultIndicatorIds → MEASURES (ThreatReductionResult → Indicator)
+✅ ThreatReductionResultObjectiveIds → DEFINES (ThreatReductionResult → Objective)
+✅ GoalRelevantStrategyIds → DEFINES (Goal → Strategy)
+✅ GoalRelevantIndicatorIds → MEASURES (Goal → Indicator)
+✅ KeyEcologicalAttributeIndicatorIds → MEASURES (KeyEcologicalAttribute → Indicator)
+```
+
+**Enhanced Diagram Link Relationship Parsing (NEW)**:
+```python
+✅ IntermediateResult → IntermediateResult (CONTRIBUTES_TO)
+✅ IntermediateResult → ThreatReductionResult (CONTRIBUTES_TO)
+✅ ThreatReductionResult → ThreatReductionResult (CONTRIBUTES_TO)
 ```
 
 **Relationship Discovery Logic**:

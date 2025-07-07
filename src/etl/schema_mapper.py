@@ -1170,6 +1170,72 @@ class MiradiToGraphMapper:
                 relationships.append(rel)
                 enhances_count += 1
                 logger.debug(f"Created ENHANCES: {from_element_id} -> {to_element_id}")
+            
+            # MISSING: Create CONTRIBUTES_TO relationships (IntermediateResult -> IntermediateResult)
+            elif (from_element_type in ['IntermediateResultId'] and 
+                  to_element_type in ['IntermediateResultId']):
+                
+                rel = MiradiRelationship(
+                    source_id=from_element_id,  # Use actual IR element ID
+                    target_id=to_element_id,    # Use actual IR element ID
+                    relationship_type=RelationshipType.CONTRIBUTES_TO,
+                    properties={
+                        'contribution_type': 'intermediate_result_chain',
+                        'source_diagram_link': link_data.get('id'),
+                        'from_element_type': from_element_type,
+                        'to_element_type': to_element_type,
+                        'from_diagram_factor': from_diagram_factor_id,
+                        'to_diagram_factor': to_diagram_factor_id
+                    },
+                    source_element="DiagramLink"
+                )
+                relationships.append(rel)
+                contributes_count += 1
+                logger.debug(f"Created CONTRIBUTES_TO (IR->IR): {from_element_id} -> {to_element_id}")
+            
+            # MISSING: Create CONTRIBUTES_TO relationships (IntermediateResult -> ThreatReductionResult)
+            elif (from_element_type in ['IntermediateResultId'] and 
+                  to_element_type in ['ThreatReductionResultId']):
+                
+                rel = MiradiRelationship(
+                    source_id=from_element_id,  # Use actual IR element ID
+                    target_id=to_element_id,    # Use actual TRR element ID
+                    relationship_type=RelationshipType.CONTRIBUTES_TO,
+                    properties={
+                        'contribution_type': 'intermediate_to_threat_reduction',
+                        'source_diagram_link': link_data.get('id'),
+                        'from_element_type': from_element_type,
+                        'to_element_type': to_element_type,
+                        'from_diagram_factor': from_diagram_factor_id,
+                        'to_diagram_factor': to_diagram_factor_id
+                    },
+                    source_element="DiagramLink"
+                )
+                relationships.append(rel)
+                contributes_count += 1
+                logger.debug(f"Created CONTRIBUTES_TO (IR->TRR): {from_element_id} -> {to_element_id}")
+            
+            # MISSING: Create CONTRIBUTES_TO relationships (ThreatReductionResult -> ThreatReductionResult)
+            elif (from_element_type in ['ThreatReductionResultId'] and 
+                  to_element_type in ['ThreatReductionResultId']):
+                
+                rel = MiradiRelationship(
+                    source_id=from_element_id,  # Use actual TRR element ID
+                    target_id=to_element_id,    # Use actual TRR element ID
+                    relationship_type=RelationshipType.CONTRIBUTES_TO,
+                    properties={
+                        'contribution_type': 'threat_reduction_chain',
+                        'source_diagram_link': link_data.get('id'),
+                        'from_element_type': from_element_type,
+                        'to_element_type': to_element_type,
+                        'from_diagram_factor': from_diagram_factor_id,
+                        'to_diagram_factor': to_diagram_factor_id
+                    },
+                    source_element="DiagramLink"
+                )
+                relationships.append(rel)
+                contributes_count += 1
+                logger.debug(f"Created CONTRIBUTES_TO (TRR->TRR): {from_element_id} -> {to_element_id}")
         
         logger.debug(f"Created {threatens_count} THREATENS relationships from diagram links")
         logger.debug(f"Created {mitigates_count} MITIGATES relationships from diagram links")
@@ -1239,6 +1305,146 @@ class MiradiToGraphMapper:
                         relationship_type=RelationshipType.DEFINES,
                         properties={'definition_type': 'strategy'},
                         source_element="ObjectiveRelevantStrategyIds"
+                    )
+                    relationships.append(rel)
+            
+            # MISSING: Objectives measure indicators
+            indicator_ids = objective_data.get('relevant_indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and objective_id:
+                    rel = MiradiRelationship(
+                        source_id=objective_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'indicator'},
+                        source_element="ObjectiveRelevantIndicatorIds"
+                    )
+                    relationships.append(rel)
+        
+        # MISSING: Create relationships from Intermediate Results
+        logger.debug("Creating relationships from Intermediate Results")
+        intermediate_results = parsed_data.get('intermediate_results', [])
+        for result in intermediate_results:
+            # Extract data from element (handles both ParsedElement and dict)
+            result_data = self._extract_element_data(result)
+            
+            result_id = result_data.get('id')
+            
+            # Intermediate Results have indicators
+            indicator_ids = result_data.get('indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and result_id:
+                    rel = MiradiRelationship(
+                        source_id=result_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'intermediate_result'},
+                        source_element="IntermediateResultIndicatorIds"
+                    )
+                    relationships.append(rel)
+            
+            # Intermediate Results have objectives
+            objective_ids = result_data.get('objective_ids', [])
+            for objective_id in objective_ids:
+                if objective_id and result_id:
+                    rel = MiradiRelationship(
+                        source_id=result_id,
+                        target_id=objective_id,
+                        relationship_type=RelationshipType.DEFINES,
+                        properties={'definition_type': 'intermediate_result'},
+                        source_element="IntermediateResultObjectiveIds"
+                    )
+                    relationships.append(rel)
+        
+        # MISSING: Create relationships from Threat Reduction Results
+        logger.debug("Creating relationships from Threat Reduction Results")
+        threat_reduction_results = parsed_data.get('threat_reduction_results', [])
+        for result in threat_reduction_results:
+            # Extract data from element (handles both ParsedElement and dict)
+            result_data = self._extract_element_data(result)
+            
+            result_id = result_data.get('id')
+            
+            # Threat Reduction Results have indicators
+            indicator_ids = result_data.get('indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and result_id:
+                    rel = MiradiRelationship(
+                        source_id=result_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'threat_reduction_result'},
+                        source_element="ThreatReductionResultIndicatorIds"
+                    )
+                    relationships.append(rel)
+            
+            # Threat Reduction Results have objectives
+            objective_ids = result_data.get('objective_ids', [])
+            for objective_id in objective_ids:
+                if objective_id and result_id:
+                    rel = MiradiRelationship(
+                        source_id=result_id,
+                        target_id=objective_id,
+                        relationship_type=RelationshipType.DEFINES,
+                        properties={'definition_type': 'threat_reduction_result'},
+                        source_element="ThreatReductionResultObjectiveIds"
+                    )
+                    relationships.append(rel)
+        
+        # MISSING: Create relationships from Goals
+        logger.debug("Creating relationships from Goals")
+        goals = parsed_data.get('goals', [])
+        for goal in goals:
+            # Extract data from element (handles both ParsedElement and dict)
+            goal_data = self._extract_element_data(goal)
+            
+            goal_id = goal_data.get('id')
+            
+            # Goals relate to strategies
+            strategy_ids = goal_data.get('relevant_strategy_ids', [])
+            for strategy_id in strategy_ids:
+                if strategy_id and goal_id:
+                    rel = MiradiRelationship(
+                        source_id=goal_id,
+                        target_id=strategy_id,
+                        relationship_type=RelationshipType.DEFINES,
+                        properties={'definition_type': 'goal_strategy'},
+                        source_element="GoalRelevantStrategyIds"
+                    )
+                    relationships.append(rel)
+            
+            # Goals relate to indicators
+            indicator_ids = goal_data.get('relevant_indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and goal_id:
+                    rel = MiradiRelationship(
+                        source_id=goal_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'goal'},
+                        source_element="GoalRelevantIndicatorIds"
+                    )
+                    relationships.append(rel)
+        
+        # MISSING: Create relationships from Key Ecological Attributes
+        logger.debug("Creating relationships from Key Ecological Attributes")
+        key_ecological_attributes = parsed_data.get('key_ecological_attributes', [])
+        for attribute in key_ecological_attributes:
+            # Extract data from element (handles both ParsedElement and dict)
+            attribute_data = self._extract_element_data(attribute)
+            
+            attribute_id = attribute_data.get('id')
+            
+            # Key Ecological Attributes have indicators
+            indicator_ids = attribute_data.get('indicator_ids', [])
+            for indicator_id in indicator_ids:
+                if indicator_id and attribute_id:
+                    rel = MiradiRelationship(
+                        source_id=attribute_id,
+                        target_id=indicator_id,
+                        relationship_type=RelationshipType.MEASURES,
+                        properties={'measurement_type': 'key_ecological_attribute'},
+                        source_element="KeyEcologicalAttributeIndicatorIds"
                     )
                     relationships.append(rel)
         

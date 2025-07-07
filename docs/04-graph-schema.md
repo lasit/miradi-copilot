@@ -209,35 +209,40 @@ Represents the overall conservation project.
 
 ## Relationship Types
 
-### AFFECTS
+### THREATENS
 Connects threats to conservation targets they impact.
 
-- **Type**: `AFFECTS`
+- **Type**: `THREATENS`
 - **Source**: `DirectThreat`
 - **Target**: `ConservationTarget`
 - **Properties**:
-  - `severity` (String): Impact severity on this specific target
-  - `scope` (String): Scope of impact on this target
-  - `irreversibility` (String): Irreversibility for this target
-  - `overall_rating` (String): Combined rating for this threat-target pair
-  - `confidence` (String): Confidence in assessment (Low, Medium, High)
-  - `evidence` (String): Supporting evidence
+  - `threat_type` (String): Type of threat impact
+  - `source_diagram_link` (String): Source diagram link ID
+  - `from_element_type` (String): Source element type
+  - `to_element_type` (String): Target element type
+  - `from_diagram_factor` (String): Source diagram factor ID
+  - `to_diagram_factor` (String): Target diagram factor ID
 - **Cardinality**: Many-to-Many
-- **Example**: `(illegal_logging:DirectThreat)-[:AFFECTS {severity: "High", scope: "Large"}]->(forest:ConservationTarget)`
+- **Example**: `(illegal_logging:DirectThreat)-[:THREATENS {threat_type: "direct"}]->(forest:ConservationTarget)`
 
-### CONTRIBUTES_TO
-Connects contributing factors to the threats they enable.
+### CONTRIBUTES_TO (ENHANCED)
+Connects multiple types of conservation elements in results chains.
 
 - **Type**: `CONTRIBUTES_TO`
-- **Source**: `ContributingFactor`
-- **Target**: `DirectThreat`
+- **Source**: `Strategy | IntermediateResult | ThreatReductionResult`
+- **Target**: `IntermediateResult | ThreatReductionResult | ConservationTarget`
 - **Properties**:
-  - `contribution_level` (String): Level of contribution (Low, Medium, High)
-  - `directness` (String): How direct the contribution is (Direct, Indirect)
-  - `confidence` (String): Confidence in relationship
-  - `evidence` (String): Supporting evidence
+  - `contribution_type` (String): Type of contribution (direct, intermediate_result_chain, intermediate_to_threat_reduction, threat_reduction_chain)
+  - `source_diagram_link` (String): Source diagram link ID
+  - `from_element_type` (String): Source element type
+  - `to_element_type` (String): Target element type
+  - `from_diagram_factor` (String): Source diagram factor ID
+  - `to_diagram_factor` (String): Target diagram factor ID
 - **Cardinality**: Many-to-Many
-- **Example**: `(poverty:ContributingFactor)-[:CONTRIBUTES_TO {contribution_level: "High"}]->(illegal_logging:DirectThreat)`
+- **Examples**: 
+  - `(strategy:Strategy)-[:CONTRIBUTES_TO {contribution_type: "direct"}]->(result:IntermediateResult)`
+  - `(ir1:IntermediateResult)-[:CONTRIBUTES_TO {contribution_type: "intermediate_result_chain"}]->(ir2:IntermediateResult)`
+  - `(ir:IntermediateResult)-[:CONTRIBUTES_TO {contribution_type: "intermediate_to_threat_reduction"}]->(trr:ThreatReductionResult)`
 
 ### MITIGATES
 Connects strategies to the threats they address.
@@ -281,31 +286,35 @@ Connects strategies that directly benefit conservation targets.
 - **Cardinality**: Many-to-Many
 - **Example**: `(restoration:Strategy)-[:ENHANCES {enhancement_type: "Restoration"}]->(habitat:ConservationTarget)`
 
-### MEASURES
-Connects indicators to the objectives they monitor.
+### MEASURES (ENHANCED)
+Connects multiple element types to indicators for monitoring.
 
 - **Type**: `MEASURES`
-- **Source**: `Indicator`
-- **Target**: `Objective`
+- **Source**: `Indicator | Objective | IntermediateResult | ThreatReductionResult | Goal | KeyEcologicalAttribute`
+- **Target**: `Activity | Strategy | Indicator | Objective`
 - **Properties**:
-  - `measurement_relationship` (String): How indicator relates to objective
-  - `sensitivity` (String): How sensitive indicator is to changes
-  - `reliability` (String): Reliability of measurement
+  - `measurement_type` (String): Type of measurement (activity, strategy, indicator, intermediate_result, threat_reduction_result, goal, key_ecological_attribute)
+  - `source_element` (String): Source element type for relationship
 - **Cardinality**: Many-to-Many
-- **Example**: `(population_count:Indicator)-[:MEASURES]->(population_goal:Objective)`
+- **Examples**: 
+  - `(indicator:Indicator)-[:MEASURES {measurement_type: "activity"}]->(activity:Activity)`
+  - `(intermediate_result:IntermediateResult)-[:MEASURES {measurement_type: "intermediate_result"}]->(indicator:Indicator)`
+  - `(goal:Goal)-[:MEASURES {measurement_type: "goal"}]->(indicator:Indicator)`
 
-### DEFINES
-Connects objectives to what they define goals for.
+### DEFINES (ENHANCED)
+Connects multiple element types to define goals and objectives.
 
 - **Type**: `DEFINES`
-- **Source**: `Objective`
-- **Target**: `ConservationTarget | DirectThreat | Strategy`
+- **Source**: `Objective | IntermediateResult | ThreatReductionResult | Goal`
+- **Target**: `Activity | Strategy | Objective | Indicator`
 - **Properties**:
-  - `objective_type` (String): Type of objective (Outcome, Impact, Output)
-  - `priority` (String): Priority level
-  - `timeline` (String): Achievement timeline
+  - `definition_type` (String): Type of definition (activity, strategy, intermediate_result, threat_reduction_result, goal_strategy)
+  - `source_element` (String): Source element type for relationship
 - **Cardinality**: Many-to-Many
-- **Example**: `(target_objective:Objective)-[:DEFINES]->(species:ConservationTarget)`
+- **Examples**: 
+  - `(objective:Objective)-[:DEFINES {definition_type: "activity"}]->(activity:Activity)`
+  - `(intermediate_result:IntermediateResult)-[:DEFINES {definition_type: "intermediate_result"}]->(objective:Objective)`
+  - `(goal:Goal)-[:DEFINES {definition_type: "goal_strategy"}]->(strategy:Strategy)`
 
 ### PART_OF
 Connects activities to their parent strategies.
