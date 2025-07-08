@@ -5,6 +5,9 @@ uvicorn[standard]==0.24.0
 # Neo4j database driver
 neo4j==5.15.0
 
+# LLM Integration
+anthropic>=0.45.2
+
 # Additional FastAPI dependencies
 pydantic==2.5.0
 python-multipart==0.0.6
